@@ -1,0 +1,56 @@
+<div class="schedule_area">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="section_title text-center mb_70">
+                <h3>Our Schedule</h3>
+                <p>
+                    Suffered alteration in some form, by injected humour or good day
+                    randomised booth anim 8-bit hella wolf moon beard words.
+                </p>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-7 p-0">
+            <div id="calendar">
+                <div class="calendar-header">
+                  <button id="prevMonth">&lt;</button>
+                  <div id="monthYear"></div>
+                  <button id="nextMonth">&gt;</button>
+                </div>
+                <div class="calendar-body">
+                    <div id="daysOfWeek">
+                        <div class="day">Sun</div>
+                        <div class="day">Mon</div>
+                        <div class="day">Tue</div>
+                        <div class="day">Wed</div>
+                        <div class="day">Thu</div>
+                        <div class="day">Fri</div>
+                        <div class="day">Sat</div>
+                      </div>
+                      <div id="calendarDays"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 p-0">
+            <div id="calendarEvent">
+                <div class="calendar-content">
+                  <div class="container">
+                    <h2 id="eventDate">Events</h2>
+                    <ul id="eventList">
+                        <!-- Events will be displayed here -->
+                        <div class="event-info">
+                            <div class="paket-name"></div>
+                            <div class="paket-time"></div>
+                         </div>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="{{ asset('frontend/js/calendar.js') }}"></script>
+      </div>
+    </div>
+</div>
