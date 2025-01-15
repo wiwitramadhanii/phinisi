@@ -18,6 +18,7 @@ use App\Http\Controllers\PaxCategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/package', [HomeController::class, 'package'])->name('package');
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+Route::get('/admin', [HomeController::class, 'admin'])->name('admin');
 
 Route::get('paxCategories/{paxCategoryId}/calculate/{numPax}', [PaxCategoryController::class, 'calculateTotalPrice']);
 Route::get('packages/{packageId}/calculate-price/{numPax}', [PaxCategoryController::class, 'calculateTotalPriceWithExtraPax']);

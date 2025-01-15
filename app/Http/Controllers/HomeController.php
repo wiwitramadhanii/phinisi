@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function admin(){
+        return view('admin');
+    }
+
     public function index(){
 
         $sliders = Slider::latest()->get();
