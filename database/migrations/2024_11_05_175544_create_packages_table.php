@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('package_name');
-            $table->string('image')->nullable();
             $table->string('banner')->nullable();
             $table->string('time');
             $table->string('route');
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->json('include')->nullable(); // Menggunakan JSON untuk include
             $table->json('exclude')->nullable(); // Menggunakan JSON untuk exclude
             $table->json('rundown')->nullable(); // Menggunakan JSON untuk rundown
-            $table->enum('status', ['available', 'full'])->default('available');
             $table->timestamps();
         });
     }

@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use App\Models\Booking;
+use App\Models\Itinerary;
 use App\Models\Package;
 use App\Models\PaxCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function admin(){
-        return view('dashboard.admin');
-    }
+    
 
     public function index(){
 
         $sliders = Slider::latest()->get();
+        $itineraries = Itinerary::latest()->get();
 
-        return view('home', compact('sliders'));
+        return view('home', compact('sliders', 'itineraries'));
     }
 
     public function package(Request $request){

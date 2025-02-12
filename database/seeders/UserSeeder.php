@@ -14,11 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Wiwit Ramadhani',
-            'email' => 'wiwitramadani@gmail.com',
-            'password' => Hash::make('123'),
-        ]);
-
+        // Cek apakah user sudah ada sebelum membuatnya
+        if (!User::where('email', 'wiwitramadani@gmail.com')->exists()) {
+            User::create([
+                'name' => 'Wiwit Ramadhani',
+                'email' => 'wiwitramadani@gmail.com',
+                'password' => Hash::make('password123'), // Gunakan password yang lebih kuat
+            ]);
+        }
     }
 }

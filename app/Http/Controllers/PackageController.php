@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Package;
 use App\Models\PaxCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PackageController extends Controller
 {
@@ -22,30 +23,35 @@ class PackageController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'time' => 'required',
-            'route' => 'required|string',
+        $request->validate([
+            'package_name' => 'required|string|max:255',
+            'banner' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Validasi untuk gambar
+            'time' => 'required|string|max:255',
+            'route' => 'required|string|max:255',
             'description' => 'nullable|string',
             'min_price' => 'required|integer',
-            'include' => 'nullable|array',
-            'exclude' => 'nullable|array',
-            'rundown' => 'nullable|array',
-            'status' => 'required|in:available,full',
+            'include' => 'nullable|json',
+            'exclude' => 'nullable|json',
+            'rundown' => 'nullable|json',
         ]);
-    
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('packages');
-        }
-    
+        // Menangani upload gambar jika ada
+        $bannerPath = null;
         if ($request->hasFile('banner')) {
-            $data['banner'] = $request->file('banner')->store('packages');
+            $bannerPath = $request->file('banner')->store('public/banners');
         }
 
-        Package::create($data);
+        $package = new Package();
+        $package->package_name = $request->package_name;
+        $package->banner = $bannerPath ? Storage::url($bannerPath) : null; // Menyimpan path gambar
+        $package->time = $request->time;
+        $package->route = $request->route;
+        $package->description = $request->description;
+        $package->min_price = $request->min_price;
+        $package->include = $request->include ? json_encode($request->include) : null;
+        $package->exclude = $request->exclude ? json_encode($request->exclude) : null;
+        $package->rundown = $request->rundown ? json_encode($request->rundown) : null;
+        $package->save();
 
         return redirect()->route('packages.index')->with('success', 'Package created successfully.');
     }
@@ -76,31 +82,40 @@ class PackageController extends Controller
 
     public function update(Request $request, $id)
     {
-        $package = Package::findOrFail($id);
-
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'time' => 'required',
-            'route' => 'required|string',
+        $request->validate([
+            'package_name' => 'required|string|max:255',
+            'banner' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Validasi untuk gambar
+            'time' => 'required|string|max:255',
+            'route' => 'required|string|max:255',
             'description' => 'nullable|string',
             'min_price' => 'required|integer',
-            'include' => 'nullable|array',
-            'exclude' => 'nullable|array',
-            'rundown' => 'nullable|array',
-            'status' => 'required|in:available,full',
+            'include' => 'nullable|json',
+            'exclude' => 'nullable|json',
+            'rundown' => 'nullable|json',
         ]);
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('packages');
-        }
-    
+        $package = Package::findOrFail($id);
+        
+        // Menangani upload gambar baru jika ada
         if ($request->hasFile('banner')) {
-            $data['banner'] = $request->file('banner')->store('packages');
+            // Hapus gambar lama jika ada
+            if ($package->banner) {
+                $oldBannerPath = str_replace('/storage', 'public', $package->banner);
+                Storage::delete($oldBannerPath);
+            }
+            $bannerPath = $request->file('banner')->store('public/banners');
+            $package->banner = Storage::url($bannerPath);
         }
 
-        $package->update($data);
+        $package->package_name = $request->package_name;
+        $package->time = $request->time;
+        $package->route = $request->route;
+        $package->description = $request->description;
+        $package->min_price = $request->min_price;
+        $package->include = $request->include ? json_encode($request->include) : null;
+        $package->exclude = $request->exclude ? json_encode($request->exclude) : null;
+        $package->rundown = $request->rundown ? json_encode($request->rundown) : null;
+        $package->save();
 
         return redirect()->route('packages.index')->with('success', 'Package updated successfully.');
     }
@@ -108,7 +123,15 @@ class PackageController extends Controller
     public function destroy($id)
     {
         $package = Package::findOrFail($id);
+        
+        // Hapus gambar jika ada
+        if ($package->banner) {
+            $oldBannerPath = str_replace('/storage', 'public', $package->banner);
+            Storage::delete($oldBannerPath);
+        }
+
         $package->delete();
+
         return redirect()->route('packages.index')->with('success', 'Package deleted successfully.');
     }
     

@@ -38,41 +38,20 @@
           </div>
         </div>
       </div>
-  
       <!-- Owl Carousel Slider -->
       <div class="row">
         <div class="col-lg-12">
           <div class="itinerary_active owl-carousel">
-            <!-- Card 1 -->
+            @foreach ($itineraries as $itinerary)
             <div class="item">
               <div class="itinerary_card">
-                <img src="https://via.placeholder.com/400x200" alt="itinerary 1">
+                <img src="({{ asset('storage/' . $itinerary->image) }})">
                 <div class="itinerary_info">
-                  <h5>Itinerary 1</h5>
-                  <p>Beautiful beach with crystal clear water.</p>
+                  <p>{{ $itinerary->subtitle }}</p>
                 </div>
               </div>
             </div>
-            <!-- Card 2 -->
-            <div class="item">
-              <div class="itinerary_card">
-                <img src="https://via.placeholder.com/400x200" alt="itinerary 2">
-                <div class="itinerary_info">
-                  <h5>itinerary 2</h5>
-                  <p>Scenic mountain views and hiking trails.</p>
-                </div>
-              </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="item">
-              <div class="itinerary_card">
-                <img src="https://via.placeholder.com/400x200" alt="itinerary 3">
-                <div class="itinerary_info">
-                  <h5>itinerary 3</h5>
-                  <p>Explore the beautiful underwater world.</p>
-                </div>
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
       </div>

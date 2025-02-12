@@ -12,6 +12,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\PaxCategoryController;
 
 // Route::get('/', function () {
@@ -31,14 +32,14 @@ Route::post('/register-process', [LoginController::class, 'register_process'])->
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
+    Route::resource('sliders', SliderController::class);
+    Route::resource('itineraries', ItineraryController::class);
 });
 
 Route::get('paxCategories/{paxCategoryId}/calculate/{numPax}', [PaxCategoryController::class, 'calculateTotalPrice']);
 Route::get('packages/{packageId}/calculate-price/{numPax}', [PaxCategoryController::class, 'calculateTotalPriceWithExtraPax']);
 Route::get('/calculate-total-price/{categoryId}/{numPax}', [PaxCategoryController::class, 'calculateTotalPrice']);
 
-
-Route::resource('sliders', SliderController::class);
 Route::resource('packages', PackageController::class);
 Route::resource('paxCategories', PaxCategoryController::class);
 

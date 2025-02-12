@@ -11,19 +11,19 @@ class SliderController extends Controller
     public function index()
     {
         $sliders = Slider::all();
-        return view('sliders.index', compact('sliders'));
+        return view('admin.sliders.index', compact('sliders'));
     }
 
     public function create()
     {
-        return view('sliders.create');
+        return view('admin.sliders.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,9isvg|max:2048',
         ]);
 
         // Menyimpan gambar ke dalam storage dan mendapatkan path
@@ -35,12 +35,12 @@ class SliderController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('sliders.index')->with('success', 'Slider created successfully.');
+        return redirect()->route('admin.sliders.index')->with('success', 'Slider created successfully.');
     }
 
     public function edit(Slider $slider)
     {
-        return view('sliders.edit', compact('slider'));
+        return view('admin.sliders.edit', compact('slider'));
     }
 
     public function update(Request $request, Slider $slider)
@@ -61,7 +61,7 @@ class SliderController extends Controller
         $slider->title = $request->title;
         $slider->save();
 
-        return redirect()->route('sliders.index')->with('success', 'Slider updated successfully.');
+        return redirect()->route('admin.sliders.index')->with('success', 'Slider updated successfully.');
     }
 
     public function destroy(Slider $slider)
@@ -69,6 +69,6 @@ class SliderController extends Controller
         Storage::disk('public')->delete($slider->image);
         $slider->delete();
 
-        return redirect()->route('sliders.index')->with('success', 'Slider deleted successfully.');
+        return redirect()->route('admin.sliders.index')->with('success', 'Slider deleted successfully.');
     }
 }

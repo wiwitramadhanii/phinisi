@@ -132,6 +132,33 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ route('admin.sliders.index') }}" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Slider
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.itineraries.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Itinerary
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('packages.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-rocket"></i>
+              <p>
+                Package
+              </p>
+            </a>
+          </li>
+
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -357,14 +384,6 @@
               <p>
                 Calendar
                 <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
-              <p>
-                Gallery
               </p>
             </a>
           </li>
