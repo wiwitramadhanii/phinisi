@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class PaxCategoryController extends Controller
 {
+    public function index()
+    {
+        $paxCategories = PaxCategory::all();
+        $packages = Package::all();
+        return view('paxCategories.index', compact('paxCategories', 'packages'));
+    }
+    public function create(){
+
+        $packages = Package::all(); 
+        return view('paxCategories.create', compact('packages'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -16,7 +28,11 @@ class PaxCategoryController extends Controller
             'price_per_pax' => 'required|numeric',
         ]);
 
-        PaxCategory::create($request->all());
+        PaxCategory::create([
+            'package_id' => $request->package_id,
+            'pax_range' => $request->pax_range,
+            'price_per_pax' => $request->price_per_pax,
+        ]);
 
         return redirect()->route('paxCategories.index')->with('success', 'Pax Category created successfully.');
     }
@@ -60,6 +76,39 @@ class PaxCategoryController extends Controller
             'num_pax' => $numPax,
             'total_price' => $totalPrice,
         ]);
+    }
+
+    public function edit($id)
+    {
+        $paxCategory = PaxCategory::findOrFail($id);
+        $packages = Package::all(); // Mengambil data package
+        return view('paxCategories.edit', compact('paxCategory', 'packages'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'package_id' => 'required|exists:packages,id',
+            'pax_range' => 'required|string|max:255',
+            'price_per_pax' => 'required|numeric|min:0',
+        ]);
+
+        $paxCategory = PaxCategory::findOrFail($id);
+        $paxCategory->update([
+            'package_id' => $request->package_id,
+            'pax_range' => $request->pax_range,
+            'price_per_pax' => $request->price_per_pax,
+        ]);
+
+        return redirect()->route('paxCategories.index')->with('success', 'Pax Category berhasil diperbarui!');
+    }
+
+    public function destroy($id)
+    {
+        $paxCategory = PaxCategory::findOrFail($id);
+        $paxCategory->delete();
+
+        return redirect()->route('paxCategories.index')->with('success', 'Pax Category berhasil dihapus!');
     }
 
     

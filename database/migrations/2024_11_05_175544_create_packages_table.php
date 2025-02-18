@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('package_name');
             $table->string('banner')->nullable();
+            $table->string('image')->nullable();
             $table->string('time');
             $table->string('route');
+            $table->string('pax');
             $table->text('description')->nullable();
             $table->integer('min_price');
             $table->json('include')->nullable(); // Menggunakan JSON untuk include

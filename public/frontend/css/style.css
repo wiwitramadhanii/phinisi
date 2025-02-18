@@ -2914,12 +2914,62 @@ header {
   color: #fff;
 }
 
+/* Container utama */
+.header_package_area {
+  padding: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 50px;
+}
+
+.gallery-img-large {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.gallery-small-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Jarak antar gambar kecil */
+  justify-content: flex-start;
+}
+
+.small-image {
+  width: 48%;
+}
+
+.gallery-img-small {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+  .gallery-header-images {
+      flex-direction: column;
+      gap: 20px; /* Jarak antar kolom pada layar kecil */
+  }
+
+  .col-md-6 {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+
+  .small-image {
+      width: 100%;
+  }
+}
+
 .package_details_info {
     padding-bottom: 150px;
-    padding-top: 70px;
-    display: flex;
+    padding-top: 10px;
+    /* display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Atur posisi elemen vertikal */
+    align-items: flex-start;  */
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -2943,10 +2993,12 @@ header {
 .package_details_info .info-container {
   background: white;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
   padding: 20px;
   width: 100%; /* Menentukan lebar card */
   transition: transform 0.3s;
+  padding-bottom: 50px;
+  margin-bottom: 10px;
 }
 
 .package_details_info .info-container .header-container {
@@ -2972,9 +3024,6 @@ header {
   border-radius: 25px; /* Membuat sudut bulat */
   display: inline-block;
   
-}
-.package_details_info .info-container:hover {
-  transform: translateY(-5px);
 }
 .package_details_info .info-container h2 {
   font-size: 40px;
@@ -3013,14 +3062,19 @@ header {
 .package_details_info .package-include-exclude {
   width: 100%;
   margin-top: 20px;
-  margin: auto;
   color: #333;
   background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 10px;
 }
 .package_details_info .package-include {
   padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.package_details_info .package-exclude {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  height: 345px;
 }
 .package_details_info .include-title, .exclude-title {
   font-size: 20px;

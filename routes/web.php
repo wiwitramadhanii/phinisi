@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::resource('users', UserController::class);
     Route::resource('sliders', SliderController::class);
     Route::resource('itineraries', ItineraryController::class);
+    Route::resource('packages', PackageController::class);
+    Route::resource('paxCategories', PaxCategoryController::class);
 });
 
 Route::get('paxCategories/{paxCategoryId}/calculate/{numPax}', [PaxCategoryController::class, 'calculateTotalPrice']);
@@ -52,8 +54,6 @@ Route::prefix('bookings')->group(function () {
     Route::get('/calculate-total-price/{paxCategory}/{numPax}', [BookingController::class, 'calculateTotalPrice']);
     Route::get('/get-price-per-pax/{paxCategory}', [BookingController::class, 'getPricePerPax']);
     Route::get('/billing/payment/{booking}', [BookingController::class, 'payment'])->name('billing.payment');
-    
-
 
 });
 

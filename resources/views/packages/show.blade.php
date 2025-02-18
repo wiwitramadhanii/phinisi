@@ -2,118 +2,111 @@
 
 @section('content')
 
-<div class="destination_banner_wrap overlay">
-    <div class="destination_text text-center">
-    </div>
-</div>
-
 <div class="package_details_info">
-    <div class="row">
-        <div class="col-12">
-            <div class="info-container">
-                <div class="header-container">
-                    <h2>{{ $package->package_name }}</h2>
-                    <div class="event-type">Private Trip</div>
+    <div class="header_package_area">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="gallery-img-large">
+                    <img src="{{ asset('frontend/img/destination/6.png') }}" alt="Galeri 1" class="gallery-img-large">
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i> {{ $package->route }}
-                </div>
-                <div class="info-item">
-                    <i class="far fa-clock"></i> {{ $package->time }}
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-users"></i> 10 - 50 Pax
+                <!-- Gambar besar di sebelah kiri -->
+            </div>
+            <div class="col-md-6">
+                <!-- 4 gambar kecil di sebelah kanan -->
+                <div class="gallery-small-images">
+                    <div class="small-image">
+                        <img src="{{ asset('frontend/img/destination/2.png') }}" alt="Galeri 2" class="gallery-img-small">
+                    </div>
+                    <div class="small-image">
+                        <img src="{{ asset('frontend/img/destination/3.png') }}" alt="Galeri 3" class="gallery-img-small">
+                    </div>
+                    <div class="small-image">
+                        <img src="{{ asset('frontend/img/destination/4.png') }}" alt="Galeri 4" class="gallery-img-small">
+                    </div>
+                    <div class="small-image">
+                        <img src="{{ asset('frontend/img/destination/5.png') }}" alt="Galeri 5" class="gallery-img-small">
+                    </div>
                 </div>
             </div>
-            <div class="package-include-exclude">
+        </div>
+    </div>
+    <div class="info-container">
+        <div class="header-container">
+            <h2>{{ $package->package_name }}</h2>
+            <div class="event-type">Private Trip</div>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i> {{ $package->route }}
+        </div>
+        <div class="info-item">
+            <i class="far fa-clock"></i> {{ $package->time }}
+        </div>
+        <div class="info-item">
+            <i class="fas fa-users"></i> {{ $package->pax }} Pax
+        </div>
+    </div>
+    <div class="package-include-exclude">
+        <div class="row">
+            <div class="col-md-6">
                 <div class="package-include">
-                    <div class="include-title">Include</div>
-                    <div class="include-list">
-                        <div class="row">
-                            @php
-                                $chunks = collect($package->include)->chunk(ceil(count($package->include) / 2));
-                            @endphp
-                            <div class="col-6">
-                                @foreach ($chunks[0] as $item)
-                                <div><i class="fas fa-check-circle"></i> {{ $item }}</div>
-                                @endforeach
-                            </div>
-                            <div class="col-6">
-                                @foreach($chunks[1] as $item)
-                                <div><i class="fas fa-check-circle"></i> {{ $item }}</div>
-                                @endforeach
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="include-title">Include</div>
+                            <div class="include-list">
+                                <div class="row">
+                                    @php
+                                        $chunks = collect($package->include)->chunk(ceil(count($package->include) / 2));
+                                    @endphp
+                                    <div class="col-6">
+                                        @foreach ($chunks[0] as $item)
+                                        <div><i class="fas fa-check-circle"></i> {{ $item }}</div>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-6">
+                                        @foreach($chunks[1] as $item)
+                                        <div><i class="fas fa-check-circle"></i> {{ $item }}</div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="package-exclude">
                     <div class="exclude-list">
                         <div class="exclude-title">Exclude</div>
                         <div class="exclude-list">
-                            <div><i class="fas fa-times-circle"></i> Add. Destination</div>
-                            <div><i class="fas fa-times-circle"></i> Add. Meals</div>
-                            <div><i class="fas fa-times-circle"></i> Add. Decoration</div>
-                            <div><i class="fas fa-times-circle"></i> Tipping Crew</div>
+                            @foreach ($package->exclude as $item)
+                                <div><i class="fas fa-check-circle"></i> {{ $item }}</div>
+                            @endforeach
                         </div>
+                        
                     </div>
                 </div>
             </div>
-            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             <div class="rundown-container">
                 <h2>Rundown Activity</h2>
                 
-                <div class="rundown-details">
-                    <div class="itinerary-time">
-                        <span class="time">5.00-5.20 pm</span>
+                @foreach ($package->rundown as $item)
+                    <div class="rundown-details">
+                        <div class="itinerary-time">
+                            <span class="time">{{ $item['time'] }}</span>
+                        </div>
+                        <div class="itinerary-details">
+                            <h3>{{ $item['activity'] }}</h3>
+                        </div>
                     </div>
-                    <div class="itinerary-details">
-                        <h3>Welcome Greeting</h3>
-                    </div>
-                </div>
-                
-                <div class="rundown-details">
-                    <div class="itinerary-time">
-                        <span class="time">5.20-6.00 pm</span>
-                    </div>
-                    <div class="itinerary-details">
-                        <h3>Education Phinisi & Sunset Time with Hakata Accoustic</h3>
-                    </div>
-                </div>
-
-                <div class="rundown-details">
-                    <div class="itinerary-time">
-                        <span class="time">6.00-6.30 pm</span>
-                    </div>
-                    <div class="itinerary-details">
-                        <h3>Maghrib Time</h3>
-                    </div>
-                </div>
-
-                <div class="rundown-details">
-                    <div class="itinerary-time">
-                        <span class="time">6.30-7.00 pm</span>
-                    </div>
-                    <div class="itinerary-details">
-                        <h3>Dinner Time</h3>
-                    </div>
-                </div>
-
-                <div class="rundown-details">
-                    <div class="itinerary-time">
-                        <span class="time">7.00-7.40 pm</span>
-                    </div>
-                    <div class="itinerary-details">
-                        <h3>Fireworks Celebrate & Dancing</h3>
-                    </div>
-                </div>
-
-                <div class="rundown-details">
-                    <div class="itinerary-time">
-                        <span class="time">7.40-8.00 pm</span>
-                    </div>
-                    <div class="itinerary-details">
-                        <h3>Sailing Back to Losari</h3>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            
+            
+            
 
             <div class="booking-container">
                 <div class="booking-details">
@@ -126,7 +119,7 @@
                                 <div class="body-title">Tiket</div>
                                 <div class="pax-controls" style="display: flex; align-items: center;">
                                     <select name="pax_category_id" id="pax-categories" style="margin-right: 10px;" required onchange="updatePrice()">
-                                        <option value="">Choose Pax</option>
+                                        <option value="">Choose Pax </option>
                                         @foreach ($paxCategories as $category)
                                             <option
                                                 value="{{ $category->id }}" 

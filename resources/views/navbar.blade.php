@@ -159,6 +159,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ route('paxCategories.index') }}" class="nav-link">
+              <i class="fas fa-users-cog"></i>
+              <p>
+                 Pax Category
+              </p>
+            </a>
+          </li>
+
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>

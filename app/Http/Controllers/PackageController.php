@@ -26,8 +26,10 @@ class PackageController extends Controller
         $request->validate([
             'package_name' => 'required|string|max:255',
             'banner' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Validasi untuk gambar
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             'time' => 'required|string|max:255',
             'route' => 'required|string|max:255',
+            'pax' => 'required',
             'description' => 'nullable|string',
             'min_price' => 'required|integer',
             'include' => 'nullable|json',
@@ -38,14 +40,20 @@ class PackageController extends Controller
         // Menangani upload gambar jika ada
         $bannerPath = null;
         if ($request->hasFile('banner')) {
-            $bannerPath = $request->file('banner')->store('public/banners');
+            $bannerPath = $request->file('banner')->store('public/packages');
+        }
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $bannerPath = $request->file('image')->store('public/packages');
         }
 
         $package = new Package();
         $package->package_name = $request->package_name;
         $package->banner = $bannerPath ? Storage::url($bannerPath) : null; // Menyimpan path gambar
+        $package->banner = $imagePath ? Storage::url($imagePath) : null;
         $package->time = $request->time;
         $package->route = $request->route;
+        $package->pax = $request->pax;
         $package->description = $request->description;
         $package->min_price = $request->min_price;
         $package->include = $request->include ? json_encode($request->include) : null;
@@ -59,6 +67,7 @@ class PackageController extends Controller
     public function show($id, Request $request) {
 
         $package = Package::findOrFail($id);
+        $paxCategories = $package->paxCategories;
         $paxCategories = PaxCategory::where('package_id', $id)->get();
         $totalPrice = 0;
 
@@ -85,8 +94,10 @@ class PackageController extends Controller
         $request->validate([
             'package_name' => 'required|string|max:255',
             'banner' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Validasi untuk gambar
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', 
             'time' => 'required|string|max:255',
             'route' => 'required|string|max:255',
+            'pax' => 'required',
             'description' => 'nullable|string',
             'min_price' => 'required|integer',
             'include' => 'nullable|json',
@@ -103,13 +114,25 @@ class PackageController extends Controller
                 $oldBannerPath = str_replace('/storage', 'public', $package->banner);
                 Storage::delete($oldBannerPath);
             }
-            $bannerPath = $request->file('banner')->store('public/banners');
+            $bannerPath = $request->file('banner')->store('public/packages');
             $package->banner = Storage::url($bannerPath);
+        }
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if ($package->image) {
+                $oldImagePath = str_replace('/storage', 'public', $package->image);
+                Storage::delete($oldImagePath);
+            }
+            $bannerPath = $request->file('banner')->store('public/packages');
+            $imagePath = $request->file('image')->store('public/packages');
+            $package->banner = Storage::url($bannerPath);
+            $package->image = Storage::url($imagePath);
         }
 
         $package->package_name = $request->package_name;
         $package->time = $request->time;
         $package->route = $request->route;
+        $package->pax = $request->pax;
         $package->description = $request->description;
         $package->min_price = $request->min_price;
         $package->include = $request->include ? json_encode($request->include) : null;
@@ -128,6 +151,10 @@ class PackageController extends Controller
         if ($package->banner) {
             $oldBannerPath = str_replace('/storage', 'public', $package->banner);
             Storage::delete($oldBannerPath);
+        }
+        if ($package->image) {
+            $oldImagePath = str_replace('/storage', 'public', $package->image);
+            Storage::delete($oldImagePath);
         }
 
         $package->delete();

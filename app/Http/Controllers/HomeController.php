@@ -24,8 +24,9 @@ class HomeController extends Controller
     public function package(Request $request){
 
         $packages = Package::latest()->get();
+        $paxCategories = PaxCategory::all();
         $date = $request->input('date');
-        return view('trip.package', compact('packages', 'date'));
+        return view('trip.package', compact('packages', 'date', 'paxCategories'));
     }
 
     public function search(Request $request)

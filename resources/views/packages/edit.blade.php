@@ -29,18 +29,30 @@
               <!-- general form elements -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Add Package</h3>
+                  <h3 class="card-title">Edit Package</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{ route('packages.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('packages.update', $package->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf  
+                    $@method('put')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="banner">Banner</label>
                             <input type="file" class="form-control @error('banner') is-invalid @enderror" name="banner">
                             <!-- error message untuk banner -->
                             @error('banner')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                            <!-- error message untuk image -->
+                            @error('image')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>

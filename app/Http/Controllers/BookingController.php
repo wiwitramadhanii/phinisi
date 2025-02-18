@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
 
+    public function index()
+    {
+        $bookings = Booking::all();
+        $paxCategories = PaxCategory::all();
+        return view('bookings.index', compact('bookings', 'paxCategories'));
+    }
+
     public function showBillingForm($package_id, Request $request)
     {
         $package = Package::findOrFail($package_id);
@@ -35,16 +42,20 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'package_id' => 'required|exists:packages,id',
+            'package_name' => 'required|string',
             'name' => 'required|string|max:255',
             'email' => 'nullable|email',
             'phone' => 'required|string',
-            'package_id' => 'required|exists:packages,id',
+            'time' => 'required',
+            'route' => 'required',
             'selected_date' => 'required|date',
-            'pax_category_id' => 'required|exists:pax_categories,id',  // Validasi dengan tabel PaxCategory
-            'num_pax' => 'required|integer|min:1', // Validasi jumlah pax
+            'pax_category' => 'required|string',
+            'num_pax' => 'required|integer|min:1',
+            'total_price' => 'required|numeric',
+            'pax_category_id' => 'required|exists:pax_categories,id',
         ]);
-
-
+        
         $package = Package::find($request->package_id);
         $paxCategory = PaxCategory::find($request->pax_category_id);
 
@@ -69,6 +80,8 @@ class BookingController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'pax_category' => $paxCategory->pax_range,
+            'time' => $request->time,
+            'route' => $request->route,
             'selected_date' => $request->selected_date,
             'time' => $request->time,
             'num_pax' => $request->num_pax,

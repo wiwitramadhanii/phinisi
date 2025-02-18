@@ -45,7 +45,7 @@
             @foreach ($itineraries as $itinerary)
             <div class="item">
               <div class="itinerary_card">
-                <img src="({{ asset('storage/' . $itinerary->image) }})">
+                <img src="{{ asset('storage/' . $itinerary->image) }}">
                 <div class="itinerary_info">
                   <p>{{ $itinerary->subtitle }}</p>
                 </div>

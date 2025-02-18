@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SliderSeeder::class,
             ItinerarySeeder::class,
+            PackageSeeder::class,
+            PaxCategorySeeder::class,
         ]);
     
     }

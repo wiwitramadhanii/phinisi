@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('package_id')->constrained()->onDelete('cascade'); // Foreign key ke tabel packages
+            $table->string('package_name');
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone');
+            $table->string('time');
+            $table->string('route');
             $table->date('selected_date');
             $table->string('pax_category'); // Menyimpan kategori pax seperti '10-14'
             $table->integer('num_pax'); // Jumlah pax yang dipesan

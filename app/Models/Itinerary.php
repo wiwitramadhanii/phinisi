@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Itinerary extends Model
 {
     protected $fillable = [
-        'image1',
+        'image',
         'subtitle',
     ];
 }
