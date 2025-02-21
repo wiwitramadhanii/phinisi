@@ -31,9 +31,7 @@
 
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
 
-    
-
-
+    <script src="{{ asset('frontend/js/calendar.js') }}"defer></script>
     
   </head>
 
@@ -214,6 +212,7 @@
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"> </script> -->
     <!-- JS here -->
+
     <script src="{{ asset('frontend/js/vendor/modernizr-3.5.0.min.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('frontend/js/popper.min.js') }}"></script>

@@ -7260,5 +7260,15 @@ h6 {
       grid-template-columns: 1fr; /* 1 kolom untuk layar sangat kecil */
   }
 }
+.dayCell.today {
+  background-color: #79aaf7;
+  color: #fff;
+  border: 2px solid #79aaf7;
+}
+
+.dayCell.today:hover {
+  background-color: #000080;
+  border-color: #000080;
+}
 
 /*# sourceMappingURL=style.css.map */

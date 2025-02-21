@@ -27,7 +27,7 @@
             <a href="https://wa.me/6282345600773?text=Saya%20telah%20melakukan%20pembayaran%20untuk%20pemesanan%20paket%20trip%20{{ urlencode($booking->package->package_name) }}%20tanggal%20{{ urlencode($booking->selected_date) }}.%20Jumlah%20pax%20:{{ $booking->num_pax }}.%20Total%20harga%20Rp%20{{ number_format($booking->total_price, 0, ',', '.') }}" class="btn btn-success" target="_blank">
                 Confirm Payment via WhatsApp
             </a>
-            <div class="home-button">
+            <div class="home-button mt-1">
                 <a href="{{ url('/') }}" class="btn btn-primary">
                     Back to Home
                 </a>

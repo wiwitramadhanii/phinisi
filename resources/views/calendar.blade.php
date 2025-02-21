@@ -28,29 +28,29 @@
                         <div class="day">Thu</div>
                         <div class="day">Fri</div>
                         <div class="day">Sat</div>
-                      </div>
-                      <div id="calendarDays"></div>
+                    </div>
+                    <div id="calendarDays"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-5 p-0">
-            <div id="calendarEvent">
-                <div class="calendar-content">
-                  <div class="container">
-                    <h2 id="eventDate">Events</h2>
-                    <ul id="eventList">
-                        <!-- Events will be displayed here -->
-                        <div class="event-info">
-                            <div class="paket-name"></div>
-                            <div class="paket-time"></div>
-                         </div>
-                    </ul>
+          <div id="calendarEvent">
+              <div class="calendar-content">
+                  <div class="container text-white">
+                      <!-- Header tanggal event akan di-update secara dinamis -->
+                      <h2 id="eventDate" class="mb-3">Package</h2>
+                      <ul id="eventList" class="list-unstyled">
+                          <!-- Data event awal akan di-render via API dari JS -->
+                          <li class="event-info">Tidak ada event tersedia.</li>
+                      </ul>
                   </div>
-                </div>
-            </div>
+              </div>
+          </div>
         </div>
-        
-        <script src="{{ asset('frontend/js/calendar.js') }}"></script>
       </div>
     </div>
 </div>
+
+<script>
+    var events = @json($events);
+</script>

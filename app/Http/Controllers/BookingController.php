@@ -38,58 +38,51 @@ class BookingController extends Controller
         ]);
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
-            'package_id' => 'required|exists:packages,id',
-            'package_name' => 'required|string',
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email',
-            'phone' => 'required|string',
-            'time' => 'required',
-            'route' => 'required',
-            'selected_date' => 'required|date',
-            'pax_category' => 'required|string',
-            'num_pax' => 'required|integer|min:1',
-            'total_price' => 'required|numeric',
-            'pax_category_id' => 'required|exists:pax_categories,id',
+            'package_id'       => 'required|exists:packages,id',
+            'name'             => 'required|string|max:255',
+            'email'            => 'nullable|email',
+            'phone'            => 'required|string',
+            'selected_date'    => 'required|date',
+            'pax_category'     => 'required|string',
+            'num_pax'          => 'required|integer|min:1',
+            'total_price'      => 'required|numeric',
+            'pax_category_id'  => 'required|exists:pax_categories,id',
         ]);
-        
+    
         $package = Package::find($request->package_id);
         $paxCategory = PaxCategory::find($request->pax_category_id);
-
-        // Cek ketersediaan slot
-        $availableSlots = $this->checkAvailability($package, $request->selected_date, $paxCategory->pax_range);
-
+    
         if (!$paxCategory) {
             return back()->with('error', 'Pax category not found.');
         }
-
+    
+        // Cek ketersediaan slot
+        $availableSlots = $this->checkAvailability($package, $request->selected_date, $paxCategory->pax_range);
         if ($availableSlots <= 0) {
             return redirect()->back()->with('error', 'The trip package is full for the selected dates.');
         }
-
+    
+        // Hitung total harga berdasarkan harga per pax
         $totalPrice = $paxCategory->price_per_pax * $request->num_pax;
-
-        // Simpan data pemesanan ke database
+    
+        // Simpan data booking ke database
         $booking = Booking::create([
-            'package_id' => $request->package_id,
-            'package_name' => $request->package_name,
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'pax_category' => $paxCategory->pax_range,
-            'time' => $request->time,
-            'route' => $request->route,
+            'package_id'    => $request->package_id,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'pax_category'  => $paxCategory->pax_range,
             'selected_date' => $request->selected_date,
-            'time' => $request->time,
-            'num_pax' => $request->num_pax,
-            'total_price' => $totalPrice,
+            'num_pax'       => $request->num_pax,
+            'total_price'   => $totalPrice,
         ]);
-
+    
         return redirect()->route('billing.payment', ['booking' => $booking->id]);
     }
+    
 
     public function payment($bookingId)
     {

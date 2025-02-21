@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CalendarController extends Controller
 {
-    public function getEvents($date)
+    public function showCalendar()
     {
-        // Ambil events yang terjadi pada tanggal tertentu
-        $events = Event::whereDate('event_date', $date)->get();
-
-        return response()->json([
-            'events' => $events
-        ]);
+        $events = Package::all();
+        return view('calendar', compact('events'));
     }
 }

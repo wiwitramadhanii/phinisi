@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Models\Booking;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -61,5 +62,13 @@ Route::prefix('bookings')->group(function () {
 Route::get('/api/check-availability', [BookingController::class, 'getFullBookedDates']);
 
 
+Route::get('/booking-info', function (Request $request) {
+    $date = $request->query('date', Carbon::today()->toDateString());
+    $bookings = Booking::whereDate('selected_date', $date)->get()->groupBy('package_id');
 
-
+    // Debugging
+    return response()->json([
+        'date' => $date,
+        'bookings' => $bookings,
+    ]);
+})->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);

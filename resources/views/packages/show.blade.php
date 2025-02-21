@@ -173,6 +173,15 @@
     }
 </script>
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const dateInput = document.getElementById("selected_date");
+
+    // Mendapatkan tanggal hari ini dalam format YYYY-MM-DD
+    let today = new Date().toISOString().split("T")[0];
+
+    // Set atribut min pada input date agar hanya bisa memilih hari ini atau setelahnya
+    dateInput.setAttribute("min", today);
+});
     function validateForm() {
         var paxCategory = document.getElementById("pax-categories").value;
         var selectedDate = document.getElementById("selected_date").value;
