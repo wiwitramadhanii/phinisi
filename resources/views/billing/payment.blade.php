@@ -23,7 +23,7 @@
             <p><strong>Account Number:</strong> 1520018649828 (Bank Mandiri)</p>
             <p><strong>Amount to be paid:</strong> Rp {{ number_format($booking->total_price, 0, ',', '.') }}</p>
 
-            <p><strong>Payment Confirmation:</strong> You can confirm the payment via WhatsApp:</p>
+            <p><strong>Payment Confirmation:</strong> You can confirm the payment via WhatsApp by attaching proof of payment:</p>
             <a href="https://wa.me/6282345600773?text=Saya%20telah%20melakukan%20pembayaran%20untuk%20pemesanan%20paket%20trip%20{{ urlencode($booking->package->package_name) }}%20tanggal%20{{ urlencode($booking->selected_date) }}.%20Jumlah%20pax%20:{{ $booking->num_pax }}.%20Total%20harga%20Rp%20{{ number_format($booking->total_price, 0, ',', '.') }}" class="btn btn-success" target="_blank">
                 Confirm Payment via WhatsApp
             </a>

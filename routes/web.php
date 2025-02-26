@@ -37,6 +37,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::resource('itineraries', ItineraryController::class);
     Route::resource('packages', PackageController::class);
     Route::resource('paxCategories', PaxCategoryController::class);
+    Route::resource('bookings', BookingController::class);
+
+});
+
+Route::prefix('bookings')->group(function () {
+    Route::post('/store', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/billing/create/{package_id}', [BookingController::class, 'showBillingForm'])->name('bookings.billing.create');  // Koreksi di sini
+    Route::post('/finalize', [BookingController::class, 'finalizeBooking'])->name('bookings.finalize');
+    Route::get('/calculate-total-price/{paxCategory}/{numPax}', [BookingController::class, 'calculateTotalPrice']);
+    Route::get('/get-price-per-pax/{paxCategory}', [BookingController::class, 'getPricePerPax']);
+    Route::get('/billing/payment/{booking}', [BookingController::class, 'payment'])->name('billing.payment');
+
 });
 
 Route::get('paxCategories/{paxCategoryId}/calculate/{numPax}', [PaxCategoryController::class, 'calculateTotalPrice']);
@@ -48,15 +60,6 @@ Route::resource('paxCategories', PaxCategoryController::class);
 
 
 
-Route::prefix('bookings')->group(function () {
-    Route::post('/store', [BookingController::class, 'store'])->name('bookings.store');
-    Route::get('/billing/create/{package_id}', [BookingController::class, 'showBillingForm'])->name('bookings.billing.create');  // Koreksi di sini
-    Route::post('/finalize', [BookingController::class, 'finalizeBooking'])->name('bookings.finalize');
-    Route::get('/calculate-total-price/{paxCategory}/{numPax}', [BookingController::class, 'calculateTotalPrice']);
-    Route::get('/get-price-per-pax/{paxCategory}', [BookingController::class, 'getPricePerPax']);
-    Route::get('/billing/payment/{booking}', [BookingController::class, 'payment'])->name('billing.payment');
-
-});
 
 // Route::get('/api/full-booked-dates', [BookingController::class, 'getFullBookedDates']);
 Route::get('/api/check-availability', [BookingController::class, 'getFullBookedDates']);

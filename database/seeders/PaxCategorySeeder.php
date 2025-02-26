@@ -61,7 +61,7 @@ class PaxCategorySeeder extends Seeder
             ],
             [
                 'package_id' => 2,
-                'pax_range' => '24-25',
+                'pax_range' => '25-50',
                 'price_per_pax' => 379000.00,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -89,7 +89,7 @@ class PaxCategorySeeder extends Seeder
             ],
             [
                 'package_id' => 3,
-                'pax_range' => '24-25',
+                'pax_range' => '25-50',
                 'price_per_pax' => 590000.00,
                 'created_at' => now(),
                 'updated_at' => now(),

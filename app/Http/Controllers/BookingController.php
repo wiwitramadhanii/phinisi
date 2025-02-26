@@ -14,7 +14,8 @@ class BookingController extends Controller
     {
         $bookings = Booking::all();
         $paxCategories = PaxCategory::all();
-        return view('bookings.index', compact('bookings', 'paxCategories'));
+        $bookings = Booking::with('package')->get();
+        return view('admin.bookings.index', compact('bookings', 'paxCategories'));
     }
 
     public function showBillingForm($package_id, Request $request)

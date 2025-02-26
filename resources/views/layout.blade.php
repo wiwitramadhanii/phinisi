@@ -36,6 +36,10 @@
   </head>
 
   <body>
+    <div id="preloader">
+      <div class="spinner"></div>
+    </div>
+  
 
     <!-- header-start -->
     <header>
@@ -251,5 +255,11 @@
         },
       });
     </script>
+    <script>
+      window.addEventListener("load", function() {
+          document.getElementById("preloader").style.display = "none";
+      });
+    </script>
+  
   </body>
 </html>

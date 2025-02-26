@@ -161,12 +161,25 @@
 
           <li class="nav-item">
             <a href="{{ route('paxCategories.index') }}" class="nav-link">
-              <i class="fas fa-users-cog"></i>
+              <i class="nav-icon fas fa-users-cog"></i>
               <p>
                  Pax Category
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.bookings.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p>
+                Booking
+              </p>
+            </a>
+          </li>
+
+
+
+          
 
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">

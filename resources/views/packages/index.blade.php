@@ -38,6 +38,7 @@
                                     <th>No</th>
                                     <th>Package Name</th>
                                     <th>Banner</th>
+                                    <th>Image</th>
                                     <th>Time</th>
                                     <th>Route</th>
                                     <th>Price</th>
