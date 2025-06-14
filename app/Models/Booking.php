@@ -20,6 +20,7 @@ class Booking extends Model
         'pax_category',
         'num_pax',
         'total_price',
+        'is_already_pay',
     ];
 
     public function bookings()

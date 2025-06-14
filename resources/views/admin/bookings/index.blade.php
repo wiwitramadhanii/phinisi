@@ -39,6 +39,8 @@
                                     <th>Pax Category</th>
                                     <th>Number Pax</th>
                                     <th>Total Price</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,18 +55,35 @@
                                     <td>{{ $booking->pax_category }}</td>
                                     <td>{{ $booking->num_pax }}</td>
                                     <td>Rp {{ number_format($booking->total_price, 0, ',', '.') }}</td>
-                                    {{-- <td>
-                                        <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-primary btn-sm">
+                                    <td>{{ $booking->is_already_pay == 1 ? 'Paid' : 'Unpaid' }}</td>
+                                    <td>
+                                        <form action="{{ route('admin.bookings.togglePay', $booking->id) }}"
+                                            method="POST" style="display:inline;">
+                                          @csrf
+                                          @method('PATCH')
+                                          @if($booking->is_already_pay)
+                                              <button class="btn btn-warning btn-sm"
+                                                      onclick="return confirm('Tandai sebagai Unpaid?')">
+                                                  <i class="fas fa-undo"></i> Unpaid
+                                              </button>
+                                          @else
+                                              <button class="btn btn-success btn-sm"
+                                                      onclick="return confirm('Tandai sebagai Paid?')">
+                                                  <i class="fas fa-check"></i> Paid
+                                              </button>
+                                          @endif
+                                      </form>
+                                        <a href="{{ route('admin.bookings.edit', $booking->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-pen"></i> Edit
                                         </a>
-                                        <form action="{{ route('packages.destroy', $package->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                                 <i class="fas fa-trash"></i> Delete
                                             </button>
                                         </form>
-                                    </td> --}}
+                                    </td>
                                 </tr> 
                                 @endforeach
                             </tbody>

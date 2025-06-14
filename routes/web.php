@@ -38,7 +38,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::resource('packages', PackageController::class);
     Route::resource('paxCategories', PaxCategoryController::class);
     Route::resource('bookings', BookingController::class);
-
+    Route::patch('bookings/{booking}/toggle-pay', 
+    [BookingController::class, 'togglePayStatus'])
+    ->name('bookings.togglePay');
 });
 
 Route::prefix('bookings')->group(function () {

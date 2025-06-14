@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('pax_category'); // Menyimpan kategori pax seperti '10-14'
             $table->integer('num_pax'); // Jumlah pax yang dipesan
             $table->decimal('total_price', 15, 2); // Total harga pemesanan
+            $table->boolean('is_already_pay')->default(0);
             $table->timestamps();
         });
     }

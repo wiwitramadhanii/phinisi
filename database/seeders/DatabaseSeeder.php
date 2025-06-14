@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ItinerarySeeder::class,
             PackageSeeder::class,
             PaxCategorySeeder::class,
+            BookingSeeder::class,
         ]);
     
     }

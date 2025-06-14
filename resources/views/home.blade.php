@@ -9,7 +9,7 @@
       <div
       style="background-image: url({{ asset('storage/' . $slider->image) }})"
       class="single_slider d-flex align-items-center overlay">
-      <div class="container">
+      {{-- <div class="container">
         <div class="row align-items-center">
           <div class="col-xl-12 col-md-12">
             <div class="slider_text text-center">
@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
      </div>
     @endforeach
     </div>

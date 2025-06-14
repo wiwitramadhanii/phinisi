@@ -51,11 +51,13 @@
                             <td>{{ $paxCategory->pax_range }}</td>
                             <td>{{ number_format($paxCategory->price_per_pax) }}</td>
                             <td>
-                                <a href="{{ route('paxCategories.edit', $paxCategory->id) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
+                                <a href="{{ route('paxCategories.edit', $paxCategory->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Edit</a>
                                 <form action="{{ route('paxCategories.destroy', $paxCategory->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                      <i class="fas fa-trash"></i> Delete
+                                  </button>
                                 </form>
                             </td>
                         </tr> 

@@ -53,18 +53,26 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                      @foreach ($users as $user)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                {{-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a> --}}
-                                <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
-                            </td>
-                          </tr>
-                        @endforeach
+                          <td>{{ $loop->iteration }}</td>
+                          <td>{{ $user->name }}</td>
+                          <td>{{ $user->email }}</td>
+                          <td>
+                            <form action="{{ route('admin.users.destroy', $user->id) }}"
+                                  method="POST"
+                                  onsubmit="return confirm('Yakin ingin menghapus user ini?')">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Delete
+                              </button>
+                            </form>
+                          </td>
+                        </tr>
+                      @endforeach
                     </tbody>
+                    
                   </table>
                 </div>
                 <!-- /.card-body -->
