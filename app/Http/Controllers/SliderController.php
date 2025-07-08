@@ -23,7 +23,7 @@ class SliderController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,9isvg|max:2048',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:10240', 
         ]);
 
         // Menyimpan gambar ke dalam storage dan mendapatkan path
@@ -47,7 +47,7 @@ class SliderController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:10240',
         ]);
 
         if ($request->hasFile('image')) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use App\Models\Booking;
+use App\Models\Documentation;
 use App\Models\Package;
 use App\Models\Itinerary;
 use App\Models\PaxCategory;
@@ -27,8 +28,9 @@ class HomeController extends Controller
     public function package(Request $request){
         $packages = Package::latest()->get();
         $paxCategories = PaxCategory::all();
+        $documentations = Documentation::all();
         $date = $request->input('date');
-        return view('trip.package', compact('packages', 'date', 'paxCategories'));
+        return view('trip.package', compact('packages', 'date', 'paxCategories', 'documentations'));
     }
 
     public function search(Request $request)

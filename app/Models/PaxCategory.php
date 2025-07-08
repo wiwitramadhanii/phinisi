@@ -18,11 +18,11 @@ class PaxCategory extends Model
     // Relasi ke model Package
     public function package()
     {
-        return $this->belongsTo(Package::class);
+        return $this->belongsTo(Package::class, 'package_id');
     }
 
     public function paxCategories()
     {
-        return $this->hasMany(PaxCategory::class);
+        return $this->hasMany(PaxCategory::class, 'package_id');
     }
 }

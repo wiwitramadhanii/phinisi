@@ -12,15 +12,13 @@ class Package extends Model
     protected $fillable = [
         'package_name',
         'image',
-        'banner',
-        'time',
         'route',
-        'description',
+        'time',
+        'pax',
         'min_price',
         'include',
         'exclude',
         'rundown',
-        'status',
     ];
 
     protected $casts = [
@@ -31,7 +29,17 @@ class Package extends Model
 
     public function paxOptions()
     {
-        return $this->hasMany(PaxCategory::class);
+        return $this->hasMany(PaxCategory::class, 'package_id');
+    }
+
+    public function paxCategories()
+    {
+        return $this->hasMany(PaxCategory::class, 'package_id');
+    }
+
+    public function documentations()
+    {
+        return $this->hasMany(Documentation::class);
     }
 
 }

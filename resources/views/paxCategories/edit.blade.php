@@ -38,9 +38,9 @@
                             <div class="form-group">
                                 <label for="package_id">Package</label>
                                 <select name="package_id" id="package_id" class="form-control" required>
-                                    <option value="">Select Package</option>
+                                    <option value="">Select Package</option> 
                                     @foreach ($packages as $package)
-                                        <option value="{{ $package->id }}">{{ $package->package_name }}</option>
+                                        <option value="{{ $package->package_id }}">{{ $package->package_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -38,7 +38,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label for="image">Image</label>
-                      <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                      <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" placeholder="Enter Image">
                       <!-- error message untuk image -->
                       @error('image')
                         <div class="alert alert-danger mt-2">

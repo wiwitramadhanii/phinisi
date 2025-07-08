@@ -37,10 +37,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Package Name</th>
-                                    <th>Banner</th>
                                     <th>Image</th>
                                     <th>Time</th>
                                     <th>Route</th>
+                                    <th>Pax</th>
                                     <th>Price</th>
                                     <th>Include</th>
                                     <th>Exclude</th>
@@ -54,34 +54,35 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $package->package_name }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . $package->banner) }}" width="100">
-                                    </td>
-                                    <td>
                                         <img src="{{ asset('storage/' . $package->image) }}" width="100">
                                     </td>
                                     <td>{{ $package->time }}</td>
                                     <td>{{ $package->route }}</td>
+                                    <td>{{ $package->pax }}</td>
                                     <td>Rp {{ number_format($package->min_price, 0, ',', '.') }}</td>
                                     <td>
-                                        <ul>
-                                            @foreach(is_string($package->include) ? json_decode($package->include) : $package->include as $include)
-                                                <li>{{ $include }}</li>
-                                            @endforeach
-                                        </ul>
+                                      <ul>
+                                        @foreach ($package->include ?? [] as $include)
+                                          <li>{{ $include }}</li>
+                                        @endforeach
+                                      </ul>
                                     </td>
                                     <td>
-                                        <ul>
-                                            @foreach(is_string($package->exclude) ? json_decode($package->exclude) : $package->exclude as $exclude)
-                                                <li>{{ $exclude }}</li>
-                                            @endforeach
-                                        </ul>
+                                      <ul>
+                                        @foreach ($package->exclude ?? [] as $exclude)
+                                          <li>{{ $exclude }}</li>
+                                        @endforeach
+                                      </ul>
                                     </td>
                                     <td>
-                                        <ul>
-                                            @foreach(is_string($package->rundown) ? json_decode($package->rundown, true) : $package->rundown as $rundown)
-                                                <li><strong>{{ $rundown['time'] }}</strong> - {{ $rundown['activity'] }}</li>
-                                            @endforeach
-                                        </ul>
+                                      <ul>
+                                        @foreach ($package->rundown ?? [] as $item)
+                                          <li>
+                                            <strong>{{ $item['time'] ?? '-' }}</strong> —
+                                            {{ $item['activity'] ?? '-' }}
+                                          </li>
+                                        @endforeach
+                                      </ul>
                                     </td>
                                     <td>
                                         <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-primary btn-sm">
@@ -112,4 +113,3 @@
 </div>
 
 @endsection
-

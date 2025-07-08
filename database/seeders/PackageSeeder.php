@@ -15,11 +15,11 @@ class PackageSeeder extends Seeder
         Package::insert([
             [
                 'package_name' => 'Golden Hours Cruise',
+                'image' => 'packages/ghc.png',
                 'time' => '17:00-20:00',
                 'route' => 'Losari - Lae Lae Island',
                 'pax' => '10-50',
                 'min_price' => 279000,
-                'description' => 'Nikmati matahari terbenam di laut Makassar dengan kapal Phinisi.',
                 'include' => json_encode([
                     'Pick Up Service', 'Welcome Drink', 'Snack', 'Meals', 'Refill Mineral Water', 
                     'Luxury Private Room', 'Safety Insurance', 'MC & Crew', 'Photo & Video', 
@@ -41,10 +41,10 @@ class PackageSeeder extends Seeder
             ],
             [
                 'package_name' => 'Morning Samalona',
+                'image' => 'packages/morning.png',
                 'time' => '08:00-13:00',
                 'route' => 'Losari - Samalona',
                 'pax' => '10-50',
-                'description' => 'Jelajahi keindahan pulau Samalona dengan snorkeling.',
                 'min_price' => 379000,
                 'include' => json_encode([
                     'Pick Up Service', 'Welcome Drink', 'Snack', 'Standart Soundsystem', 'Seafood Meals Bbq',
@@ -72,10 +72,10 @@ class PackageSeeder extends Seeder
             ],
             [
                 'package_name' => 'Full Day Kodingareng',
+                'image' => 'packages/fullday.png',
                 'time' => '08:00-20:00',
                 'route' => 'Losari - Kodingareng Keke',
                 'pax' => '10-50',
-                'description' => 'Sehari penuh menikmati keindahan Pulau Kodingareng dengan berbagai aktivitas menarik.',
                 'min_price' => 590000,
                 'include' => json_encode([
                     'Pick Up Service', 'Welcome Drink', 'Snack', 'Standart Soundsystem', 'Live Accoustic', 'Seafood Meals Bbq',

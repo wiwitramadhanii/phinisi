@@ -2,30 +2,61 @@
 
 @section('content')
 
+@php
+        // Ambil semua path gambar dari relasi documentations
+        $allImages = $documentations->pluck('file_path')->toArray();
+
+        // Gambar besar: elemen pertama (jika ada)
+        $bigImage = $allImages[0] ?? null;
+
+        // Gambar kecil: ambil elemen 1–4, lalu pad supaya selalu ada 4 item
+        $smallImages = array_slice($allImages, 1, 4);
+        $smallImages = array_pad($smallImages, 4, null);
+@endphp
+
 <div class="package_details_info">
     <div class="header_package_area">
         <div class="row">
-            <div class="col-md-6">
-                <div class="gallery-img-large">
-                    <img src="{{ asset('frontend/img/destination/6.png') }}" alt="Galeri 1" class="gallery-img-large">
-                </div>
-                <!-- Gambar besar di sebelah kiri -->
+            {{-- KIRI: gambar besar --}}
+            <div class="col-md-6 mb-4">
+                @if($bigImage)
+                    <img 
+                      src="{{ Storage::url($bigImage) }}" 
+                      alt="Gambar Utama" 
+                      class="img-fluid w-100 rounded"
+                    >
+                @else
+                    <div 
+                      class="bg-light d-flex align-items-center justify-content-center rounded" 
+                      style="height:100px;"
+                    >
+                      <span class="text-muted">Belum ada gambar</span>
+                    </div>
+                @endif
             </div>
+        
+            {{-- KANAN: 2×2 grid --}}
             <div class="col-md-6">
-                <!-- 4 gambar kecil di sebelah kanan -->
-                <div class="gallery-small-images">
-                    <div class="small-image">
-                        <img src="{{ asset('frontend/img/destination/2.png') }}" alt="Galeri 2" class="gallery-img-small">
-                    </div>
-                    <div class="small-image">
-                        <img src="{{ asset('frontend/img/destination/3.png') }}" alt="Galeri 3" class="gallery-img-small">
-                    </div>
-                    <div class="small-image">
-                        <img src="{{ asset('frontend/img/destination/4.png') }}" alt="Galeri 4" class="gallery-img-small">
-                    </div>
-                    <div class="small-image">
-                        <img src="{{ asset('frontend/img/destination/5.png') }}" alt="Galeri 5" class="gallery-img-small">
-                    </div>
+                <div class="row">
+                    @foreach($smallImages as $img)
+                        <div class="col-6 mb-3">
+                            @if($img)
+                                <img 
+                                  src="{{ Storage::url($img) }}" 
+                                  alt="Gambar Kecil" 
+                                  class="img-fluid rounded"
+                                  style="height:140px; object-fit:cover; width:100%;"
+                                >
+                            @else
+                                <div 
+                                  class="bg-light d-flex align-items-center justify-content-center rounded" 
+                                  style="height:140px;"
+                                >
+                                  <span class="text-muted">–</span>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -118,17 +149,17 @@
                             <div class="body-top-booking">
                                 <div class="body-title">Tiket</div>
                                 <div class="pax-controls" style="display: flex; align-items: center;">
-                                    <select name="pax_category_id" id="pax-categories" style="margin-right: 10px;" required onchange="updatePrice()">
-                                        <option value="">Choose Pax </option>
+                                    <select name="pax_category_id" id="pax-categories" required onchange="updatePrice()">
+                                        <option value="">Choose Pax</option>
                                         @foreach ($paxCategories as $category)
                                             <option
-                                                value="{{ $category->id }}" 
-                                                data-price="{{ $category->price_per_pax }}" 
+                                                value="{{ $category->id }}"
+                                                data-price="{{ $category->price_per_pax }}"
                                                 data-pax-range="{{ $category->pax_range }}">
                                                 {{ $category->pax_range }} pax (Rp {{ number_format($category->price_per_pax, 0, ',', '.') }}/pax)
                                             </option>
                                         @endforeach
-                                    </select>
+                                    </select>                                                                       
                                 </div>
                             </div>
                             <div class="body-info-booking">

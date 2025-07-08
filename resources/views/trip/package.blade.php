@@ -21,7 +21,7 @@
                     <div class="package-content">
                         <div class="package-image">
                             <a href="{{ route('packages.show', $package->id, ['date' => request('date')]) }}">
-                                <img src="https://via.placeholder.com/400x200" alt="">
+                                <img src="{{ asset('storage/' . $package->image) }}" alt="">
                             </a>
                         </div>
                         <div class="package-data-wrapper">

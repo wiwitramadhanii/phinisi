@@ -13,8 +13,10 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\PaxCategoryController;
+use App\Models\Documentation;
 
 // Route::get('/', function () {
 //     return view('home');
@@ -38,6 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::resource('packages', PackageController::class);
     Route::resource('paxCategories', PaxCategoryController::class);
     Route::resource('bookings', BookingController::class);
+    Route::resource('documentations', DocumentationController::class);
     Route::patch('bookings/{booking}/toggle-pay', 
     [BookingController::class, 'togglePayStatus'])
     ->name('bookings.togglePay');
@@ -59,7 +62,7 @@ Route::get('/calculate-total-price/{categoryId}/{numPax}', [PaxCategoryControlle
 
 Route::resource('packages', PackageController::class);
 Route::resource('paxCategories', PaxCategoryController::class);
-
+Route::resource('documentations', Documentation::class);
 
 
 

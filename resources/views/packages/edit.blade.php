@@ -3,146 +3,176 @@
 @section('content')
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Content Header -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Data Package</h1>
-          </div><!-- /.col -->
+            <h1 class="m-0">Edit Package</h1>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('packages.index') }}">Back</a></li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <!-- left column -->
-            <div class="col-12">
-              <!-- general form elements -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Edit Package</h3>
-                </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <form action="{{ route('packages.update', $package->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf  
-                    $@method('put')
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="banner">Banner</label>
-                            <input type="file" class="form-control @error('banner') is-invalid @enderror" name="banner">
-                            <!-- error message untuk banner -->
-                            @error('banner')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image">Image</label>
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
-                            <!-- error message untuk image -->
-                            @error('image')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="name">Package Name</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Enter Package Name">
-                            @error('name')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="time">Time</label>
-                            <input type="text" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time') }}" placeholder="Enter Trip Time">
-                            @error('time')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="route">Route</label>
-                            <input type="text" class="form-control @error('route') is-invalid @enderror" name="route" value="{{ old('route') }}" placeholder="Enter Trip Route">
-                            @error('route')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="min_price">Price</label>
-                            <input type="number" class="form-control @error('min_price') is-invalid @enderror" name="min_price" value="{{ old('min_price') }}" placeholder="Enter Minimum Price">
-                            @error('min_price')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="include">Include</label>
-                            <textarea class="form-control @error('include') is-invalid @enderror" name="include" rows="3" placeholder="Enter items included in the package">{{ old('include') }}</textarea>
-                            @error('include')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="exclude">Exclude</label>
-                            <textarea class="form-control @error('exclude') is-invalid @enderror" name="exclude" rows="3" placeholder="Enter items excluded from the package">{{ old('exclude') }}</textarea>
-                            @error('exclude')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                
-                        <div class="form-group">
-                            <label for="rundown">Rundown</label>
-                            <textarea class="form-control @error('rundown') is-invalid @enderror" name="rundown" rows="5" placeholder='Example: [{"time": "08:00", "activity": "Departure"}, {"time": "10:00", "activity": "Island Tour"}]'>{{ old('rundown') }}</textarea>
-                            @error('rundown')
-                                <div class="alert alert-danger mt-2">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
-                
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Package Form</h3>
               </div>
-              <!-- /.card -->
+              <form action="{{ route('packages.update', $package->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="card-body">
+                  {{-- Package fields --}}
+                  <div class="form-group">
+                    <label>Package Name</label>
+                    <input type="text" name="package_name" class="form-control" value="{{ old('package_name', $package->package_name) }}" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" name="image" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Time</label>
+                    <input type="text" name="time" class="form-control" value="{{ old('time',$package->time) }}" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Route</label>
+                    <input type="text" name="route" class="form-control" value="{{ old('route', $package->route) }}" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Pax</label>
+                    <input type="text" name="pax" class="form-control" value="{{ old('pax', $package->pax) }}" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" name="min_price" class="form-control" value="{{ old('min_price', $package->min_price) }}" required>
+                  </div>
+
+                  {{-- Dynamic Include --}}
+                  <div class="form-group">
+                    <label>Include Items</label>
+                    <div id="include-list">
+                      <div class="input-group mb-2">
+                        <input type="text" name="include[]" class="form-control" placeholder="Item included" >
+                        <div class="input-group-append">
+                          <button class="btn btn-danger remove-include" type="button">&times;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <button id="add-include" class="btn btn-secondary btn-sm" type="button">+ Add Include</button>
+                  </div>
+
+                  {{-- Dynamic Exclude --}}
+                  <div class="form-group">
+                    <label>Exclude Items</nabel>
+                    <div id="exclude-list">
+                      <div class="input-group mb-2">
+                        <input type="text" name="exclude[]" class="form-control" placeholder="Item excluded" >
+                        <div class="input-group-append">
+                          <button class="btn btn-danger remove-exclude" type="button">&times;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <button id="add-exclude" class="btn btn-secondary btn-sm" type="button">+ Add Exclude</button>
+                  </div>
+
+                  {{-- Dynamic Rundown --}}
+                  <div class="form-group">
+                    <label>Rundown Schedule</label>
+                    <div id="rundown-list">
+                      <div class="form-row mb-2">
+                        <div class="col-3">
+                          <input type="time" name="rundown[0][time]" class="form-control" >
+                        </div>
+                        <div class="col-8">
+                          <input type="text" name="rundown[0][activity]" class="form-control" placeholder="Activity" >
+                        </div>
+                        <div class="col-1">
+                          <button class="btn btn-danger remove-rundown" type="button">&times;</button>
+                        </div>
+                      </div>
+                    </div>
+                    <button id="add-rundown" class="btn btn-secondary btn-sm" type="button">+ Add Rundown</button>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
+        </div>
+      </div>
+    </section>
 </div>
+
+{{-- JavaScript Dinamis --}}
+@push('scripts')
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Include
+    document.getElementById('add-include').addEventListener('click', () => {
+      let wrapper = document.createElement('div');
+      wrapper.classList.add('input-group', 'mb-2');
+      wrapper.innerHTML = `
+        <input type="text" name="include[]" class="form-control" placeholder="Item included" required>
+        <div class="input-group-append">
+          <button class="btn btn-danger remove-include" type="button">&times;</button>
+        </div>`;
+      document.getElementById('include-list').appendChild(wrapper);
+    });
+    document.body.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-include')) e.target.closest('.input-group').remove();
+    });
+
+    // Exclude
+    document.getElementById('add-exclude').addEventListener('click', () => {
+      let wrapper = document.createElement('div');
+      wrapper.classList.add('input-group', 'mb-2');
+      wrapper.innerHTML = `
+        <input type="text" name="exclude[]" class="form-control" placeholder="Item excluded" required>
+        <div class="input-group-append">
+          <button class="btn btn-danger remove-exclude" type="button">&times;</button>
+        </div>`;
+      document.getElementById('exclude-list').appendChild(wrapper);
+    });
+    document.body.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-exclude')) e.target.closest('.input-group').remove();
+    });
+
+    // Rundown
+    let rundownIndex = 1;
+    document.getElementById('add-rundown').addEventListener('click', () => {
+      let row = document.createElement('div');
+      row.classList.add('form-row', 'mb-2');
+      row.innerHTML = `
+        <div class="col-3">
+          <input type="time" name="rundown[${rundownIndex}][time]" class="form-control" required>
+        </div>
+        <div class="col-8">
+          <input type="text" name="rundown[${rundownIndex}][activity]" class="form-control" placeholder="Activity" required>
+        </div>
+        <div class="col-1">
+          <button class="btn btn-danger remove-rundown" type="button">&times;</button>
+        </div>`;
+      rundownIndex++;
+      document.getElementById('rundown-list').appendChild(row);
+    });
+    document.body.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-rundown')) e.target.closest('.form-row').remove();
+    });
+  });
+</script>
+@endpush
+
 @endsection

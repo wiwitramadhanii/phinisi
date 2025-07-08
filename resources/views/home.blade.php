@@ -7,7 +7,7 @@
     <div class="slider_active owl-carousel">
     @foreach ($sliders as $slider)
       <div
-      style="background-image: url({{ asset('storage/' . $slider->image) }})"
+      style="background-image: url({{ asset('storage/' . $slider->image) }})" width="100"
       class="single_slider d-flex align-items-center overlay">
       {{-- <div class="container">
         <div class="row align-items-center">
