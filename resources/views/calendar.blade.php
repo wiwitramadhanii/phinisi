@@ -5,8 +5,7 @@
             <div class="section_title text-center mb_70">
                 <h3>Our Schedule</h3>
                 <p>
-                    Suffered alteration in some form, by injected humour or good day
-                    randomised booth anim 8-bit hella wolf moon beard words.
+                    Don't delay your holiday! From island hopping to golden sunsets, choose your favourite trip and set sail with us.
                 </p>
             </div>
         </div>
@@ -41,7 +40,7 @@
                       <h2 id="eventDate" class="mb-3">Packages</h2>
                       <ul id="eventList" class="list-unstyled">
                           <!-- Data event awal akan di-render via API dari JS -->
-                          <li class="event-info">Tidak ada event tersedia.</li>
+                          <li class="event-info">No events are available.</li>
                       </ul>
                   </div>
               </div>

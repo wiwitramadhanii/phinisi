@@ -23,7 +23,7 @@ class ItineraryController extends Controller
     {
         $request->validate([
             'subtitle' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:51200',
         ]);
 
         $imagePath = $request->file('image')->store('itineraries', 'public');
@@ -45,7 +45,7 @@ class ItineraryController extends Controller
     {
         $request->validate([
             'subtitle' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:51200',
         ]);
 
         if ($request->hasFile('image')) {

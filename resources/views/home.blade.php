@@ -30,11 +30,11 @@
       <div class="row justify-content-center">
         <div class="col-lg-6">
           <div class="section_title text-center mb_70">
-            <h3>Popular itinerary</h3>
+            <h3>Sail With Us</h3>
             <p>
-              Suffered alteration in some form, by injected humour or good day
-              randomised booth anim 8-bit hella wolf moon beard words.
+              One ship, thousands of experiences! The thrill of sailing on a legendary ship, and savouring moments of serenity. 
             </p>
+            <p>A journey you'll always remember</p>
           </div>
         </div>
       </div>

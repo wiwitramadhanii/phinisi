@@ -103,12 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     li.innerHTML = `
                         <a href="/packages/${event.id}" class="paket-name h5 mb-2">${event.package_name}</a>
-                        <div class="paket-time mb-1">Waktu: ${event.time}</div>
-                        <div class="paket-route mb-2">Rute: ${event.route}</div>
+                        <div class="paket-time mb-1">Time: ${event.time}</div>
+                        <div class="paket-route mb-2">Route: ${event.route}</div>
                         ${
                             isBooked 
-                            ? '<div class="bg-danger text-white p-2 rounded">Paket ini sudah di-book untuk tanggal ini.</div>'
-                            : '<div class="bg-success text-white p-2 rounded">Paket ini tersedia untuk tanggal ini.</div>'
+                            ? '<div class="bg-danger text-white p-2 rounded">This package is already booked for this date.</div>'
+                            : '<div class="bg-success text-white p-2 rounded">This package is available for this date.</div>'
                         }
                     `;
                     eventList.appendChild(li);

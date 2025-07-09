@@ -48,36 +48,28 @@ if(menu.length){
   // });
 
 // review-active
-$('.slider_active').owlCarousel({
-  loop:true,
-  margin:0,
-  items:1,
-  autoplay:true,
-  navText:['<i class="ti-angle-left"></i>','<i class="ti-angle-right"></i>'],
-  nav:true,
-  dots:false,
-  autoplayHoverPause: true,
-  autoplaySpeed: 800,
-  animateOut: 'fadeOut',
-  animateIn: 'fadeIn',
-  responsive:{
-      0:{
-          items:1,
-          nav:false,
-      },
-      767:{
-          items:1
-      },
-      992:{
-          items:1
-      },
-      1200:{
-          items:1
-      },
-      1600:{
-          items:1
-      }
-  }
+$(function(){
+  $('.slider_active').owlCarousel({
+    loop: true,
+    margin: 0,
+    items: 1,
+    autoplay: true,
+    autoplayTimeout: 5000,   // jeda antar slide (ms)
+    smartSpeed: 800,         // kecepatan transisi (ms)
+    nav: true,
+    navText: ['<i class="ti-angle-left"></i>','<i class="ti-angle-right"></i>'],
+    dots: false,
+    autoplayHoverPause: true,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    responsive: {
+      0:    { items:1, nav:false },
+      767:  { items:1 },
+      992:  { items:1 },
+      1200: { items:1 },
+      1600: { items:1 }
+    }
+  });
 });
 
 //itinerary-active
@@ -86,6 +78,9 @@ $(document).ready(function(){
     loop: true,
     margin: 10,
     nav: true,
+    autoplay: true,
+    autoplayTimeout: 5000,
+    smartSpeed: 800, 
     responsive: {
       0: { items: 1 },
       600: { items: 2 },

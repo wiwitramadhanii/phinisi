@@ -28,7 +28,6 @@
       href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
 
     <script src="{{ asset('frontend/js/calendar.js') }}"defer></script>

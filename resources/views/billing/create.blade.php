@@ -1,116 +1,196 @@
 @extends('layout')
 
 @section('content')
-    <div class="billing_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="billing-form">
-                        <h3>Form Data Diri</h3>
-                        <form action="{{ route('bookings.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="package_id" value="{{ $package->id }}">
-                            <input type="hidden" name="selected_date" value="{{ request('selected_date') }}">
-                            <input type="hidden" name="pax_category_id" id="pax_category_id"
-                                value="{{ old('pax_category_id', $paxCategory->id) }}">
-                            <input type="hidden" name="total_price" id="total_price" value="0">
-                            <input type="hidden" name="pax_category" value="{{ $paxCategory->pax_range }}">
-
-                            <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" name="name" id="name" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="number" name="phone" id="phone" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="pax">Number of Pax</label>
-                                <input type="number" name="num_pax" id="pax" class="form-control"
-                                    min="{{ $minPax }}" max="{{ $maxPax }}" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Total Price:</label>
-                                <p id="display_total_price">Rp 0</p>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Checkout</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="package-details">
-                        <h2>{{ $package->package_name }}</h2>
-                        <p><strong>Route:</strong> {{ $package->route }}</p>
-                        <p><strong>Time:</strong> {{ $package->time }}</p>
-                        <p><strong>Date:</strong> {{ request('selected_date') }}</p>
-                        <p><strong>Pax Category:</strong> <span id="selected_pax_category">{{ $paxCategory->pax_range }}
-                                pax (Rp {{ number_format($paxCategory->price_per_pax, 0, ',', '.') }}/pax)</span></p>
-                    </div>
-                </div>
+<div class="billing-area">
+    <div class="container">
+      <div class="row gx-5">
+        <!-- Form Data Diri -->
+        <div class="col-lg-6">
+          <div class="card billing-card">
+            <div class="card-header text-white">
+              <h4 class="mb-0 text-white"><i class="bi bi-person-square me-2"></i>Form Data Diri</h3>
             </div>
+            <div class="card-body">
+              <form action="{{ route('bookings.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="package_id"      value="{{ $package->id }}">
+                <input type="hidden" name="selected_date"   value="{{ request('selected_date') }}">
+                <input type="hidden" name="pax_category_id" id="pax_category_id" value="{{ old('pax_category_id', $paxCategory->id) }}">
+                <input type="hidden" name="total_price"     id="total_price"     value="0">
+                <input type="hidden" name="pax_category"    value="{{ $paxCategory->pax_range }}">
+  
+                <div class="mb-3">
+                  <label for="name"  class="form-label">Full Name</label>
+                  <input type="text" name="name" id="name" class="form-control shadow-sm" placeholder="Masukkan nama lengkap" required>
+                </div>
+  
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" name="email" id="email" class="form-control shadow-sm" placeholder="contoh@domain.com" required>
+                </div>
+  
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input type="tel" name="phone" id="phone" class="form-control shadow-sm" placeholder="+62 812 3456 7890" required>
+                </div>
+  
+                <div class="mb-3">
+                    <label for="pax" class="form-label">Number of Pax</label>
+                    <div class="input-group pax-spinner" style="max-width: 160px;">
+                      <button type="button" class="btn btn-outline-secondary" id="pax-decrease">–</button>
+                      <input
+                        type="text"
+                        name="num_pax"
+                        id="pax"
+                        class="form-control text-center shadow-sm"
+                        value="{{ $minPax }}"
+                        readonly
+                        required
+                      >
+                      <button type="button" class="btn btn-outline-secondary" id="pax-increase">+</button>
+                    </div>
+                  </div>
+  
+                <div class="mb-4">
+                  <label class="form-label">Total Price:</label>
+                  <p id="display_total_price" class="fs-4 text-primary fw-bold">Rp 0</p>
+                </div>
+  
+                <button type="submit" class="btn btn-gradient w-100 py-2 text-white">Checkout Sekarang</button>
+              </form>
+            </div>
+          </div>
         </div>
-        <style>
-            .billing_area {
-                padding: 40px;
-
-            }
-
-            .package-details {
-                border: 1px solid #ccc;
-                padding: 15px;
-                margin-bottom: 20px;
-                border-radius: 10px
-            }
-
-            .billing-form {
-                border: 1px solid #ccc;
-                padding: 15px;
-                border-radius: 10px
-            }
-
-            .form-group {
-                margin-bottom: 15px;
-            }
-
-            .btn-primary {
-                background-color: #007bff;
-                border-color: #007bff;
-                color: white;
-                padding: 10px 20px;
-                border-radius: 5px;
-            }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #0056b3;
-            }
-        </style>
-
-        <script>
-            document.getElementById('pax').addEventListener('input', function() {
-                // Harga per pax dari server-side
-                const pricePerPax = {{ $pricePerPax }};
-
-                // Jumlah pax yang dipilih oleh user
-                const numPax = parseInt(this.value) || 0;
-
-                // Kalkulasi total harga
-                const totalPrice = numPax * pricePerPax;
-
-                // Menampilkan total harga di elemen dengan id 'display_total_price'
-                document.getElementById('display_total_price').textContent =
-                    `Rp ${new Intl.NumberFormat('id-ID').format(totalPrice)}`;
-                document.getElementById('total_price').value = totalPrice;
-            });
-        </script>
+  
+        <!-- Detail Paket -->
+        <div class="col-lg-6">
+          <div class="card detail-card">
+            <div class="card-body">
+              <h3 class="card-title mb-3">{{ $package->package_name }}</h3>
+              <ul class="list-unstyled">
+                <li class="mb-2"><i class="bi bi-geo-alt-fill me-2 text-secondary"></i><strong>Route:</strong> {{ $package->route }}</li>
+                <li class="mb-2"><i class="bi bi-clock-fill me-2 text-secondary"></i><strong>Time:</strong> {{ $package->time }}</li>
+                <li class="mb-2"><i class="bi bi-calendar-event-fill me-2 text-secondary"></i><strong>Date:</strong> {{ request('selected_date') }}</li>
+                <li class="mb-2"><i class="bi bi-people-fill me-2 text-secondary"></i><strong>Pax Category:</strong>
+                  <span id="selected_pax_category">{{ $paxCategory->pax_range }} pax (Rp {{ number_format($paxCategory->price_per_pax,0,',','.') }}/pax)</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  
+    <!-- Styles -->
+    <style>
+      .billing-area {
+        padding: 50px 0;
+        background: #f8f9fa;
+      }
+  
+      .billing-card, .detail-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      }
+  
+      .billing-card .card-header {
+        background: navy;
+      }
+
+      .billing-area h5 {
+        font-size: 10px;
+      }
+  
+      .billing-card .form-control {
+        border-radius: 6px;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+  
+      .billing-card .form-control:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0,153,255,0.3);
+      }
+  
+      .btn-gradient {
+        background: navy;
+        border: none;
+        font-weight: 600;
+        border-radius: 6px;
+        transition: opacity 0.2s;
+      }
+  
+      .btn-gradient:hover {
+        opacity: 0.9;
+      }
+  
+      .detail-card .list-unstyled li {
+        display: flex;
+        align-items: center;
+      }
+  
+      .detail-card .list-unstyled li i {
+        font-size: 1.2rem;
+      }
+      .pax-spinner .btn {
+        width: 40px;
+        padding: 0;
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+      .pax-spinner .form-control {
+        border-left: none;
+        border-right: none;
+      }
+    </style>
+  
+    <!-- Script Perhitungan Harga -->
+    <script>
+      document.getElementById('pax').addEventListener('input', function() {
+        const pricePerPax = {{ $pricePerPax }};
+        const numPax = parseInt(this.value) || 0;
+        const totalPrice = numPax * pricePerPax;
+        document.getElementById('display_total_price').textContent =
+          `Rp ${new Intl.NumberFormat('id-ID').format(totalPrice)}`;
+        document.getElementById('total_price').value = totalPrice;
+      });
+    </script>
+    <script>
+        (function(){
+          const minPax = {{ $minPax }};
+          const maxPax = {{ $maxPax }};
+          const pricePerPax = {{ $pricePerPax }};
+          const input = document.getElementById('pax');
+          const display = document.getElementById('display_total_price');
+          const hiddenTotal = document.getElementById('total_price');
+      
+          function updateDisplay(val) {
+            const total = val * pricePerPax;
+            display.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(total)}`;
+            hiddenTotal.value = total;
+          }
+      
+          document.getElementById('pax-increase').addEventListener('click', () => {
+            let val = parseInt(input.value, 10);
+            if (val < maxPax) {
+              input.value = ++val;
+              updateDisplay(val);
+            }
+          });
+      
+          document.getElementById('pax-decrease').addEventListener('click', () => {
+            let val = parseInt(input.value, 10);
+            if (val > minPax) {
+              input.value = --val;
+              updateDisplay(val);
+            }
+          });
+      
+          // inisialisasi awal
+          updateDisplay(parseInt(input.value, 10));
+        })();
+    </script>
+</div>
+  
 @endsection
