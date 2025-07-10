@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\PaxCategoryController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Documentation;
 
 // Route::get('/', function () {
@@ -25,6 +26,8 @@ use App\Models\Documentation;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/package', [HomeController::class, 'package'])->name('package');
 Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

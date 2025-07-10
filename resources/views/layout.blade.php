@@ -36,7 +36,11 @@
 
   <body>
     <div id="preloader">
-      <div class="spinner"></div>
+      <div class="dots">
+        <span class="dot dot1"></span>
+        <span class="dot dot2"></span>
+        <span class="dot dot3"></span>
+      </div>
     </div>
   
 
@@ -44,38 +48,28 @@
     <header>
       <div class="header-area">
         <div id="sticky-header" class="main-header-area">
-          <div class="container-fluid">
-            <div class="header_bottom_border">
+          <div class="container">
+            <div class="header-bottom">
               <div class="row align-items-center">
-                <div class="col-xl-2 col-lg-2">
+                <div class="col-logo">
                   <div class="logo">
                     <a href="{{ route('home') }}">
-                      <img src="{{ asset('frontend/img/phinisi/logo-header.png') }}" alt="" />
+                      <img src="{{ asset('frontend/img/phinisi/logo-header.png') }}" alt="Logo Pinisi Hakata" />
                     </a>
                   </div>
                 </div>
-                <div class="col-xl-8 col-lg-8">
-                  <div class="main-menu d-none d-lg-block">
-                    <nav>
-                      <ul id="navigation">
-                        <li>
-                          <a href="{{ route('home') }}">home</a>
-                        </li>
-                        <li>
-                          <a href="{{ route('home') }}">Profile</a>
-                        </li>
-                        <li>
-                          <a href="{{ route('package') }}">Package</a>
-                        </li>
-                        <li>
-                          <a href="{{ route('home') }}">Event</a>
-                        </li>
-                      </ul>
-                    </nav>
-                  </div>
+                <div class="col-nav">
+                  <nav class="main-menu d-none d-lg-block">
+                    <ul id="navigation">
+                      <li><a href="{{ route('home') }}">Home</a></li>
+                      <li><a href="{{ route('profile') }}">Profile</a></li>
+                      <li><a href="{{ route('package') }}">Package</a></li>
+                      <li><a href="{{ route('home') }}">Event</a></li>
+                    </ul>
+                  </nav>
                 </div>
-                <div class="col-12">
-                  <div class="mobile_menu d-block d-lg-none"></div>
+                <div class="col-toggle d-block d-lg-none">
+                  <button class="mobile-toggle"><span></span><span></span><span></span></button>
                 </div>
               </div>
             </div>
@@ -83,112 +77,91 @@
         </div>
       </div>
     </header>
+    
     <!-- header-end -->
 
     @yield('content')
 
-    <footer class="footer">
-      <div class="footer_top">
+    <footer class="footer bg-navy text-light pt-5">
+      <div class="footer_top pb-4">
         <div class="container">
-          <div class="row">
-            <div class="col-xl-4 col-md-6 col-lg-4">
+          <div class="row gy-4">
+    
+            <!-- Logo & Deskripsi -->
+            <div class="col-md-4">
               <div class="footer_widget">
-                <div class="footer_logo">
-                  <a href="#">
-                    <img src="{{ asset('frontend/img/phinisi/logo-footer.png') }}" alt="" />
-                  </a>
-                </div>
-                <p>
-                  Pantai Losari
+                <a href="#" class="d-inline-block mb-3">
+                  <img src="{{ asset('frontend/img/phinisi/logo-footer.png') }}"
+                       alt="Logo Pinisi Hakata"
+                       class="img-fluid"
+                       style="max-height: 60px;" />
+                </a>
+                <p class="small">
+                  Pantai Losari – Destinasi wisata ikonik di Makassar dengan sunset terbaik.
                 </p>
-                {{-- <div class="socail_links">
-                  <ul>
-                    <li>
-                      <a href="#">
-                        <i class="ti-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-instagram"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa fa-youtube-play"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div> --}}
-              </div>
-            </div>
-            {{-- <div class="col-xl-2 col-md-6 col-lg-2">
-              <div class="footer_widget">
-                <h3 class="footer_title">Company</h3>
-                <ul class="links">
-                  <li><a href="#">Pricing</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#"> Gallery</a></li>
-                  <li><a href="#"> Contact</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-lg-3">
-              <div class="footer_widget">
-                <h3 class="footer_title">Popular destination</h3>
-                <ul class="links double_links">
-                  <li><a href="#">Indonesia</a></li>
-                  <li><a href="#">America</a></li>
-                  <li><a href="#">India</a></li>
-                  <li><a href="#">Switzerland</a></li>
-                  <li><a href="#">Italy</a></li>
-                  <li><a href="#">Canada</a></li>
-                  <li><a href="#">Franch</a></li>
-                  <li><a href="#">England</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-lg-3">
-              <div class="footer_widget">
-                <h3 class="footer_title">Instagram</h3>
-                <div class="instagram_feed">
-                  <div class="single_insta">
-                    <a href="#">
-                      <img src="img/instagram/1.png" alt="" />
-                    </a>
-                  </div>
-                  <div class="single_insta">
-                    <a href="#">
-                      <img src="img/instagram/2.png" alt="" />
-                    </a>
-                  </div>
-                  <div class="single_insta">
-                    <a href="#">
-                      <img src="img/instagram/3.png" alt="" />
-                    </a>
-                  </div>
-                  <div class="single_insta">
-                    <a href="#">
-                      <img src="img/instagram/4.png" alt="" />
-                    </a>
-                  </div>
-                  <div class="single_insta">
-                    <a href="#">
-                      <img src="img/instagram/5.png" alt="" />
-                    </a>
-                  </div>
-                  <div class="single_insta">
-                    <a href="#">
-                      <img src="img/instagram/6.png" alt="" />
-                    </a>
-                  </div>
+                <div class="social_links mt-3">
+                  <a href="#" class="social-icon"><i class="ti-facebook"></i></a>
+                  <a href="#" class="social-icon"><i class="fa fa-instagram"></i></a>
+                  <a href="#" class="social-icon"><i class="fa fa-youtube-play"></i></a>
                 </div>
               </div>
-            </div> --}}
+            </div>
+    
+            <!-- Quick Links -->
+            <div class="col-md-2 border-start border-secondary ps-md-4">
+              <div class="footer_widget">
+                <h5 class="footer_title mb-3">Perusahaan</h5>
+                <ul class="list-unstyled links">
+                  <li><a href="{{ route('profile') }}">Tentang Kami</a></li>
+                  <li><a href="{{ route('package') }}">Layanan</a></li>
+                </ul>
+              </div>
+            </div>
+    
+            <!-- Destinasi Populer -->
+            <div class="col-md-3 border-start border-secondary ps-md-4">
+              <div class="footer_widget">
+                <h5 class="footer_title mb-3">Packages</h5>
+                <ul class="list-unstyled links double_links">
+                  <li><a href="{{ route('package') }}">Golden Hours Cruise</a></li>
+                  <li><a href="{{ route('package') }}">Morning Samalona</a></li>
+                  <li><a href="{{ route('package') }}">Full Day Kodingareng</a></li>
+                </ul>
+              </div>
+            </div>
+    
+            <!-- Kontak & Newsletter -->
+            <div class="col-md-3 border-start border-secondary ps-md-4">
+              <div class="footer_widget">
+                <h5 class="footer_title mb-3">Newsletter</h5>
+                <form class="d-flex mb-4">
+                  <input type="email"
+                         class="form-control form-control-sm me-2"
+                         placeholder="Email Anda" />
+                  <button type="submit" class="btn btn-sm btn-light">Daftar</button>
+                </form>
+                <div class="contact">
+                  <p class="small mb-2"><i class="fa fa-map-marker-alt me-2"></i>Jl. Pantai Losari No.1, Makassar</p>
+                  <p class="small mb-2"><i class="fa fa-phone me-2"></i>+62 812 3456 7890</p>
+                  <p class="small"><i class="fa fa-envelope me-2"></i>info@pinisihakata.co.id</p>
+                </div>
+              </div>
+            </div>
+    
+          </div> <!-- /.row -->
+    
+          <hr class="border-secondary my-4" />
+    
+          <div class="row">
+            <div class="col text-center">
+              <p class="small mb-0">&copy; 2025 Pinisi Hakata. All rights reserved.</p>
+            </div>
           </div>
-        </div>
-      </div>
+        </div> <!-- /.container -->
+      </div> <!-- /.footer_top -->
     </footer>
+    
+    
 
     <!-- Modal -->
     <div
@@ -255,10 +228,21 @@
       });
     </script>
     <script>
-      window.addEventListener("load", function() {
-          document.getElementById("preloader").style.display = "none";
+      window.addEventListener('load', function() {
+        const preloader = document.getElementById('preloader');
+        // tambahkan class .hide untuk transisi fade‑out
+        preloader.classList.add('hide');
+        
+        // (opsional) benar-benar remove dari DOM setelah transisi selesai
+        setTimeout(() => {
+          if (preloader.parentNode) {
+            preloader.parentNode.removeChild(preloader);
+          }
+        }, 600); // delay sedikit lebih panjang dari durasi transition
       });
     </script>
+    
+
   
   </body>
 </html>

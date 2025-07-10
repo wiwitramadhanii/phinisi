@@ -827,9 +827,30 @@ header {
   width: 100%;
   height: 100%;
   top: 0;
-  z-index: 9;
+  z-index: 1000;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.col-logo {
+  flex: 0 0 auto;
+  width: 150px;
+}
+.logo img {
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+.col-nav {
+  flex: 1;
 }
 
 @media (max-width: 767px) {
@@ -970,12 +991,19 @@ header {
     display: none;
   }
 }
-
+.main-menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
 /* line 93, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_header.scss */
 .header-area .main-header-area .main-menu ul li {
   display: inline-block;
   position: relative;
   margin: 0 35px 0 0;
+  margin-left: 30px;
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
@@ -987,15 +1015,16 @@ header {
 
 /* line 103, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_header.scss */
 .header-area .main-header-area .main-menu ul li a {
-  color: #040E27;
-  font-size: 16px;
+  color: #333;
+  font-size: 1rem;
   text-transform: capitalize;
   font-weight: 400;
   display: inline-block;
   padding: 0px 0px 0px 0px;
-  font-family: "Rubik", sans-serif;
+  font-family: 'Poppins', sans-serif;
   position: relative;
   text-transform: capitalize;
+  transition: color 0.3s ease;
 }
 
 /* line 113, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_header.scss */
@@ -1745,6 +1774,15 @@ header {
   z-index: 0;
 }
 
+.footer_title {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.footer .links a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 /* line 9, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_footer.scss */
 .footer .footer_top {
   padding-top: 115px;
@@ -2043,6 +2081,93 @@ header {
   color: #FF4A52 !important;
   border-color: transparent;
 }
+
+/*=== Footer Styles ===*/
+.footer {
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer_top {
+  position: relative;
+}
+
+.footer_logo img {
+  /* menambahkan efek shadow halus */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.footer_title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer_widget .links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer_widget .links li a {
+  transition: color 0.3s ease;
+}
+
+.footer_widget .links li a:hover {
+  color: #ffdd57; /* highlight warna kuning */
+  text-decoration: none;
+}
+
+.double_links {
+  columns: 2;
+  -webkit-columns: 2;
+}
+
+.social_links a {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #ccc;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social_links a:hover {
+  color: #ffdd57;
+  transform: translateY(-3px);
+}
+
+.contact i {
+  color: #ffdd57;
+  margin-right: 0.5rem;
+}
+
+form input.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+form input.form-control::placeholder {
+  color: #ddd;
+}
+
+form .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+form .btn-outline-light:hover {
+  background-color: #ffdd57;
+  color: #000;
+  border-color: #ffdd57;
+}
+
+/* Responsiveness tweaks */
+@media (max-width: 576px) {
+  .double_links {
+    columns: 1;
+  }
+  .social_links a {
+    margin-right: 1rem !important;
+  }
+}
+
 
 /* line 1, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_bradcam.scss */
 .bradcam_bg_1 {
@@ -3081,9 +3206,49 @@ header {
 }
 .package_details_info .package-include-exclude-rundown {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 2rem;
   color: #333;
   background-color: white;
+}
+.package-include-exclude-rundown .card {
+  border-radius: 0.75rem;
+  transition: transform var(--transition-time), box-shadow var(--transition-time);
+}
+.package-include-exclude-rundown .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+}
+.package-include-exclude-rundown .card-header {
+  background-color: navy !important;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  padding: 0.75rem 1.25rem;
+}
+.package-include-exclude-rundown .card-header h5 {
+  flex: 1;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ICONS */
+.package-include-exclude-rundown .card-header .fa {
+  color: #fff;
+}
+
+.package-include-exclude-rundown .card-body {
+  background-color: var(--secondary-color);
+  padding: 1.25rem;
+  color: var(--text-color);
+  overflow: auto;
+}
+.package-include-exclude-rundown .card-body .fa-check-circle {
+  color: navy;
+  margin-right: 0.5rem;
+}
+.package-include-exclude-rundown .card-body .fa-times-circle-o {
+  color: var(--danger-color);
+  margin-right: 0.5rem;
 }
 .package_details_info .package-include-exclude-rundown .row {
   display: flex;
@@ -3092,6 +3257,38 @@ header {
 .package_details_info .package-include-exclude-rundown .col-md-6 {
   display: flex;
   flex-direction: column;
+}
+.package-include-exclude-rundown .card-body .row > .col-6 {
+  margin-bottom: 0.5rem;
+}
+.package-include-exclude-rundown .card-body ul {
+  padding-left: 0;
+}
+.package-include-exclude-rundown .card-body ul li:last-child {
+  border-bottom: none;
+}
+.package-include-exclude-rundown .rundown-item {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 0.75rem;
+}
+.package-include-exclude-rundown .rundown-item:last-child {
+  border-bottom: none;
+}
+.package-include-exclude-rundown .rundown-time {
+  min-width: 4.5rem;
+  font-weight: 600;
+}
+.package-include-exclude-rundown .rundown-content h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.package-include-exclude-rundown .rundown-content small {
+  font-size: 0.875rem;
+}
+@media (max-width: 767.98px) {
+  .package-include-exclude-rundown .card {
+    margin-bottom: 1.5rem;
+  }
 }
 /* Pastikan semua h-100 berfungsi penuh */
 .package-include-exclude-rundown .h-100 {
@@ -3236,7 +3433,68 @@ header {
   text-align: left;
   width: 100%;
 }
+.rundown-activity .card-body {
+  position: relative;
+  padding-left: 2.5rem; /* space untuk garis dan titik */
+}
+.rundown-activity .card-body::before {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 1rem;
+  width: 2px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.rundown-activity .rundown-item {
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+.rundown-activity .rundown-item:last-child {
+  padding-bottom: 0;
+}
 
+/* 3. Titik (circle) pada setiap item */
+.rundown-activity .rundown-item::before {
+  content: '';
+  position: absolute;
+  left: -0.2rem; top: 0.25rem;
+  width: 0.75rem; height: 0.75rem;
+  background-color: var(--primary-color);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+}
+
+/* 4. Style waktu */
+.rundown-activity .rundown-time {
+  min-width: 4.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-align: right;
+}
+
+/* 5. Card-body padding & hover effect */
+.rundown-activity .card-body .rundown-item:hover h6 {
+  color: var(--primary-color);
+}
+.rundown-activity .card-body .rundown-item h6 {
+  transition: color 0.3s;
+}
+
+/* 6. Spacing konten */
+.rundown-activity .rundown-content {
+  margin-left: 1rem;
+  padding: 2px;
+}
+.rundown-activity .rundown-content h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.rundown-activity .rundown-content small {
+  font-size: 0.875rem;
+  color: #666;
+}
 .rundown-container {
   background-color: #ffffff;                    /* pastikan background putih */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);     /* box‑shadow terlihat nyata */
@@ -3367,25 +3625,31 @@ header {
 .package_details_info .booking-container {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 2rem;
   width: 100%;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .package_details_info .booking-details {
-  border-radius: 10px;
+  border-radius: 1rem;
   padding: 20px;
   width: 100%;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.booking-details:hover {
+  transform: translateY(-5px);
 }
 .package_details_info .header-booking {
-  align-items: center;
-  padding-bottom: 10px;
+  background: #f5f7fa;
+  padding: 1rem;
+  text-align: left;
+  border-radius: 10px;
 }
 .package_details_info .header-title {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 500;
-  color: #333;
+  color: navy;
 }
 .package_details_info .pax-list {
   display: flex;
@@ -3417,7 +3681,7 @@ header {
 }
 .package_details_info .body-booking {
   border: 1px solid #ccc;
-  padding: 20px ;
+  padding: 1.5rem ;
   text-align: left;
   border-radius: 10px;
   margin-top: 20px;
@@ -3432,6 +3696,7 @@ header {
 .package_details_info .body-title{
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 .package_details_info .body-info-booking{
   margin-bottom: 20px;
@@ -3455,6 +3720,54 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
+}
+.booking-details,
+.body-top-booking,
+.pax-controls {
+  overflow: visible !important;
+}
+.pax-controls {
+  flex: 1 1 auto;
+  min-width: 0;         /* supaya flex bisa mengecil dengan benar */
+}
+.pax-controls select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  white-space: normal;    /* cegah teks option wrap di sebagian browser */
+  overflow: hidden;
+  text-overflow: ellipsis; /* jika memang terlampau panjang, tampilkan “...” */
+  z-index: 999;
+}
+.pax-controls select option {
+  white-space: normal;    /* memungkinkan teks opsi tampil penuh di popup */
+}
+.pax-controls select:focus {
+  outline: none;
+  border-color: #0a2239;
+}
+.price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a2239;
+  text-align: right;
+}
+.date-available input[type="date"] {
+  padding: 0.5rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+.date-available input[type="date"]:focus {
+  outline: none;
+  border-color: #0a2239;
+}
+
+/* Pesan ketersediaan */
+#availabilityMessage {
+  font-size: 0.9rem;
 }
 .booking .btn-booking {
   background: navy;
@@ -3473,7 +3786,24 @@ header {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
-
+.btn-booking {
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem;
+  background: #0a2239;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.btn-booking:hover {
+  background: #1e3a5f;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
 .booking .btn-booking:disabled {
   background: #ccc;
   cursor: not-allowed;
@@ -6662,7 +6992,42 @@ h6 {
   font-size: 16px;
   margin-right: 5px;
 }
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-right: 0.5rem;
+  background-color: #1e3a5f;
+  border-radius: 50%;
+  color: #fff;
+  transition: background-color .3s;
+}
+.social-icon:hover {
+  background-color: #2563eb;
+  text-decoration: none;
+}
+.footer_widget form input {
+  border-radius: 0;
+}
+.footer_widget form .btn {
+  border-radius: 0;
+}
 
+/* Double links (dua kolom dalam satu list) */
+.double_links li {
+  width: 50%;
+  float: left;
+  margin-bottom: 0.5rem;
+}
+
+/* Clear float pada double_links */
+.double_links:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 /* line 1156, ../../Arafath/CL/December/231. Travel-02/HTML/scss/_blog.scss */
 .single-post-area .navigation-top .social-icons li {
   display: inline-block;
@@ -7425,33 +7790,50 @@ h6 {
   border-color: #000080;
 }
 
-/* Preloader Container */
+/* overlay full‑screen */
 #preloader {
   position: fixed;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  z-index: 9999;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-/* Animasi Spinner */
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #3498db;
+/* saat di‑hide */
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* animasi dots */
+.dots {
+  display: flex;
+  gap: 8px;
+}
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #fff;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  opacity: 0.6;
+  animation: bounce 1s infinite ease-in-out;
+}
+.dot1 { animation-delay: 0s; }
+.dot2 { animation-delay: 0.2s; }
+.dot3 { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.6; }
+  40%           { transform: translateY(-12px); opacity: 1; }
 }
 
-/* Keyframes Animasi */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+
 
 
 /*# sourceMappingURL=style.css.map */

@@ -18,8 +18,7 @@ class HomeController extends Controller
         $sliders = Slider::latest()->get();
         $itineraries = Itinerary::latest()->get();
         $events = Package::all();
-        // Data booking awal (misalnya, untuk tanggal hari ini) bisa tetap dikirim jika diperlukan untuk inisialisasi,
-        // tapi tidak wajib karena kita akan update via API di client-side.
+        
         $bookings = Booking::whereDate('selected_date', Carbon::today())->get()->groupBy('package_id');
         return view('home', compact('sliders', 'itineraries', 'events', 'bookings'));
     }

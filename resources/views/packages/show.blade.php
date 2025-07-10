@@ -24,7 +24,7 @@
                   src="{{ Storage::url($bigImage) }}" 
                   alt="Gambar Utama" 
                   class="img-fluid w-100 border-radius:20px" 
-                  style="border-radius: 10px;"
+                  style="border-radius: 10px; height:440px;"
                 >
               @else
                 <div 
@@ -87,118 +87,119 @@
           
     </div>
     <div class="package-include-exclude-rundown">
-        <div class="row d-flex align-items-stretch">
-            <div class="col-md-6 d-flex flex-column gap-1">
-                <div class="package-include h-100 mt-2">
-                    <div class="card shadow-sm border-0">
-                      <div class="card-header bg-navy text-white d-flex align-items-center">
-                        <span class="icon-wrapper me-3">
-                          <i class="fa fa-check-circle fa-2x"></i>
-                        </span>
-                        <h5 class="mb-0 text-white"> What’s Included</h5>
-                      </div>
-                      <div class="card-body">
-                        @php
-                          $chunks = collect($package->include)->chunk(ceil(count($package->include)/2));
-                        @endphp
-                        <div class="row">
-                          @foreach($chunks as $chunk)
-                            <div class="col-6">
-                              @foreach($chunk as $item)
-                                <div class="d-flex align-items-center py-2">
-                                  <i class="fa fa-check-circle text-navy" style="margin-right: 0.5rem;"></i>
-                                  <span>{{ $item }}</span>
-                                </div>
-                              @endforeach
-                            </div>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                <div class="package-exclude h-100 mt-2">
-                    <div class="card shadow-lg border-0">
-                      <div class="card-header bg-navy text-white d-flex align-items-center">
-                        <i class="fa fa-ban fa-2x me-2"></i>
-                        <h5 class="mb-0 text-white">What’s Excluded</h5>
-                      </div>
-                      <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                          @foreach ($package->exclude as $item)
-                            <li class="list-group-item d-flex align-items-center py-2 border-0">
-                              <i class="fa fa-times-circle-o text-danger" style="margin-right: 0.5rem;"></i>
-                              <span>{{ $item }}</span>
-                            </li>
-                          @endforeach
-                        </ul>
-                      </div>
-                    </div>
-                </div>
+      <div class="row d-flex align-items-stretch">
+        
+        <!-- INCLUDE -->
+        <div class="col-md-4 d-flex flex-column mb-3 mb-md-0">
+          <div class="card shadow-sm border-0 h-100 flex-fill">
+            <div class="card-header bg-navy text-white d-flex align-items-center">
+              <i class="fa fa-check-circle fa-2x me-3"></i>
+              <h5 class="mb-0 text-white">What’s Included</h5>
             </div>
-            <div class="col-md-6 d-flex">
-                <div class="rundown-container mt-4 bg-white shadow-lg rounded-4 p-4">
-                    <h2 class="mb-4">Rundown Activity</h2>
-                    @foreach ($package->rundown as $item)
-                      <div class="rundown-item d-flex">
-                        <div class="rundown-time text-navy">
-                          <span class="time">{{ $item['time'] }}</span>
-                        </div>
-                        <div class="rundown-content p-3">
-                          <h5 class="mb-1">{{ $item['activity'] }}</h5>
-                        </div>
+            <div class="card-body">
+              @php
+                $chunks = collect($package->include)
+                            ->chunk(ceil(count($package->include)/2));
+              @endphp
+              <div class="row">
+                @foreach($chunks as $chunk)
+                  <div class="col-6">
+                    @foreach($chunk as $item)
+                      <div class="d-flex align-items-center py-2">
+                        <i class="fa fa-check-circle text-navy me-2"></i>
+                        <span>{{ $item }}</span>
                       </div>
                     @endforeach
-                </div>
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
         </div>
+    
+        <!-- EXCLUDE -->
+        <div class="col-md-4 d-flex flex-column mb-3 mb-md-0">
+          <div class="card shadow-sm border-0 h-100 flex-fill">
+            <div class="card-header bg-navy text-white d-flex align-items-center">
+              <i class="fa fa-ban fa-2x me-2"></i>
+              <h5 class="mb-0">What’s Excluded</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-unstyled mb-0">
+                @foreach ($package->exclude as $item)
+                  <li class="d-flex align-items-center py-2">
+                    <i class="fa fa-times-circle-o text-danger me-2"></i>
+                    <span>{{ $item }}</span>
+                  </li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+        </div>
+    
+        <!-- RUNDOWN -->
+        <div class="col-md-4 d-flex flex-column mb-3 mb-md-0 rundowns">
+          <div class="card shadow-sm border-0 h-100 flex-fill">
+            <div class="card-header bg-navy text-white d-flex align-items-center">
+              <i class="fa fa-ship fa-2x me-2"></i>
+              <h5 class="mb-0">Rundown Activity</h5>
+            </div>
+            <div class="card-body rundown-activity">
+              @foreach ($package->rundown as $item)
+                <div class="d-flex mb-3 rundown-item">
+                  <div class="rundown-time">
+                    <strong>{{ $item['time'] }}</strong>
+                  </div>
+                  <div class="rundown-content">
+                    <h6 class="mb-1">{{ $item['activity'] }}</h6>
+                    @if(!empty($item['detail']))
+                      <small>{{ $item['detail'] }}</small>
+                    @endif
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="booking-container">
-        <div class="booking-details">
-            <div class="header-booking">
-                <div class="header-title">Price List</div>
-            </div>
-            <form action="{{ route('bookings.billing.create', ['package_id' => $package->id]) }}" method="GET" id="bookingForm">
-                <div class="body-booking">
-                    <div class="body-top-booking">
-                        <div class="body-title">Tiket</div>
-                        <div class="pax-controls" style="display: flex; align-items: center;">
-                            <select name="pax_category_id" id="pax-categories" required onchange="updatePrice()">
-                                <option value="">Choose Pax</option>
-                                @foreach ($paxCategories as $category)
-                                    <option
-                                        value="{{ $category->id }}"
-                                        data-price="{{ $category->price_per_pax }}"
-                                        data-pax-range="{{ $category->pax_range }}">
-                                        {{ $category->pax_range }} pax (Rp {{ number_format($category->price_per_pax, 0, ',', '.') }}/pax)
-                                    </option>
-                                @endforeach
-                            </select>                                                                       
-                        </div>
-                    </div>
-                    <div class="body-info-booking">
-                        <div class="price" id="priceDisplay">Total Price: Rp 0</div>
-                    </div>
-                    <div class="body-bottom-booking">
-                        <div class="date-available" style="display: flex; align-items: center;">
-                            <input type="date" name="selected_date" id="selected_date" onchange="checkDateAvailability()">
-                            <span id="availabilityMessage" style="margin-left: 10px;"></span>
-                        </div>
-                        
-                        <div class="booking">
-  <button 
-    type="submit" 
-    id="submitButton" 
-    class="btn-booking" 
-    onclick="return validateForm()"
-  >
-    Book Now
-  </button>
-</div>
-
-                    </div>
-                </div>
-            </form>
+      <div class="booking-details">
+        <div class="header-booking">
+          <div class="header-title">Price List</div>
         </div>
-    </div>
+        <form action="{{ route('bookings.billing.create', ['package_id' => $package->id]) }}" method="GET" id="bookingForm">
+          <div class="body-booking">
+            <div class="body-top-booking">
+              <div class="pax-controls">
+                <select name="pax_category_id" id="pax-categories" required onchange="updatePrice()">
+                  <option value="">Choose Pax</option>
+                  @foreach ($paxCategories as $category)
+                    <option
+                      value="{{ $category->id }}"
+                      data-price="{{ $category->price_per_pax }}"
+                      data-pax-range="{{ $category->pax_range }}">
+                      {{ $category->pax_range }} pax (Rp {{ number_format($category->price_per_pax, 0, ',', '.') }}/pax)
+                    </option>
+                  @endforeach
+                </select>                                                                       
+              </div>
+            </div>
+            <div class="body-info-booking">
+              <div class="price" id="priceDisplay">Total Price: Rp 0</div>
+            </div>
+            <div class="body-bottom-booking">
+              <div class="date-available">
+                <input type="date" name="selected_date" id="selected_date" onchange="checkDateAvailability()">
+                <span id="availabilityMessage"></span>
+              </div>
+              <div class="booking">
+                <button type="submit" id="submitButton" class="btn-booking" onclick="return validateForm()">Book Now</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 </div>
 <script>
@@ -231,7 +232,7 @@
 
     // Set atribut min pada input date agar hanya bisa memilih hari ini atau setelahnya
     dateInput.setAttribute("min", today);
-});
+    });
     function validateForm() {
         var paxCategory = document.getElementById("pax-categories").value;
         var selectedDate = document.getElementById("selected_date").value;
@@ -319,5 +320,4 @@
         }
     }
 </script>
-
 @endsection
