@@ -62,7 +62,7 @@ class ItineraryController extends Controller
 
     public function destroy(Itinerary $itinerary)
     {
-        Storage::delete('public/' . $itinerary->image);
+        Storage::disk('public')->delete($itinerary->image);
         $itinerary->delete();
 
         return redirect()->route('admin.itineraries.index')->with('success', 'Itinerary berhasil dihapus!');

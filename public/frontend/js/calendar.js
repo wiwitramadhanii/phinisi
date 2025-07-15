@@ -99,16 +99,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
 
                     const li = document.createElement('li');
-                    li.classList.add('event-info', 'mb-4', 'p-3', 'border', 'rounded');
+                    li.classList.add('event-info', 'mb-3', 'p-2', 'border', 'rounded');
 
                     li.innerHTML = `
-                        <a href="/packages/${event.id}" class="paket-name h5 mb-2">${event.package_name}</a>
-                        <div class="paket-time mb-1">Time: ${event.time}</div>
-                        <div class="paket-route mb-2">Route: ${event.route}</div>
+                        <a href="/packages/${event.id}" class="paket-name h6 mb-2">${event.package_name}</a>
+                        <div class="paket-time mb-1" style="font-size: 13px">Time: ${event.time}</div>
+                        <div class="paket-route mb-2" style="font-size: 13px">Route: ${event.route}</div>
                         ${
                             isBooked 
-                            ? '<div class="bg-danger text-white p-2 rounded">This package is already booked for this date.</div>'
-                            : '<div class="bg-success text-white p-2 rounded">This package is available for this date.</div>'
+                            ? '<div class="bg-danger text-white p-2 rounded" style="font-size: 15px">This package is already booked for this date.</div>'
+                            : '<div class="bg-success text-white p-2 rounded" style="font-size: 15px">This package is available for this date.</div>'
                         }
                     `;
                     eventList.appendChild(li);

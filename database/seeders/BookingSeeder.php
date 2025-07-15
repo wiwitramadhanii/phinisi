@@ -30,7 +30,7 @@ class BookingSeeder extends Seeder
         DB::table('bookings')->truncate();
 
         // Buat 10 contoh booking
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 5; $i++) {
             $package    = $packages->random();
             $paxCat     = $paxCategories->random();
             // generate jumlah pax antara min dan max kategori

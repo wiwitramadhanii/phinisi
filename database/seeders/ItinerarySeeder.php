@@ -4,19 +4,57 @@ namespace Database\Seeders;
 
 use App\Models\Itinerary;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ItinerarySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run()
+    public function run(): void
     {
-        Itinerary::create([
-            'subtitle' => 'Gathering',
-            'image' => 'itineraries/gathering.jpeg', // Pastikan file ini ada di storage/public/itineraries
-        ]);
+
+        $itineraries = [
+            [
+                'subtitle' => 'Gathering',
+                'image'    => 'itineraries/gathering.png',
+            ],
+            [
+                'subtitle' => 'Outing',
+                'image'    => 'itineraries/outing.png',
+            ],
+            [
+                'subtitle' => 'Lunch',
+                'image'    => 'itineraries/lunch.png',
+            ],
+            [
+                'subtitle' => 'Snorkeling',
+                'image'    => 'itineraries/snorkeling.png',
+            ],
+            [
+                'subtitle' => 'Fun Games',
+                'image'    => 'itineraries/fun games.png',
+            ],
+            [
+                'subtitle' => 'Fireworks Celebrate & Dancing',
+                'image'    => 'itineraries/fireworks celebrate.png',
+            ],
+            [
+                'subtitle' => 'Dinner',
+                'image'    => 'itineraries/dinner.png',
+            ],
+            [
+                'subtitle' => 'Karaoke & Dancing Tome',
+                'image'    => 'itineraries/karaoke.png',
+            ],
+            [
+                'subtitle' => 'Breakfast on Board',
+                'image'    => 'itineraries/Breakfast.png',
+            ],
+
+        ];
+
+        foreach ($itineraries as $item) {
+            Itinerary::create([
+                'subtitle'   => $item['subtitle'],
+                'image'      => $item['image'],
+            ]);
+        }
     }
 }

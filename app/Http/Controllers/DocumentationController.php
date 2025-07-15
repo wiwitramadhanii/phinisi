@@ -39,15 +39,13 @@ class DocumentationController extends Controller
             'file_path.*' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:10240',
         ]);
 
-        foreach ($request->file('file_path') as $file) {
-            $path = $file->store('documentations', 'public');
-    
-            Documentation::create([
-                'package_id' => $request->package_id,
-                'file_path'  => $path,
-            ]);
-        }
-
+        $paths = [];
+        $paths[] = $request->file('file_path')->store('documentations', 'public');
+        
+        Documentation::create([
+            'package_id' => $request->package_id,
+            'file_path'  => $paths,
+          ]);
         return redirect()->route('admin.documentations.index')->with('success', 'File created successfully');
     }
 

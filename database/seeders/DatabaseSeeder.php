@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Slider;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\DocumentationSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             PackageSeeder::class,
             PaxCategorySeeder::class,
             BookingSeeder::class,
+            DocumentationSeeder::class,
         ]);
     
     }

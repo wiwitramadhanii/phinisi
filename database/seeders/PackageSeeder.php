@@ -96,6 +96,34 @@ class PackageSeeder extends Seeder
                 ]),
                 'created_at' => now(),
                 'updated_at' => now()
+            ],
+            [
+                'package_name' => 'Golden Sunrise Cruise',
+                'image' => 'packages/gsc.jpg',
+                'time' => '05:00-07:30',
+                'route' => 'Losari - Lae-Lae Island',
+                'pax' => '10-50',
+                'min_price' => 249000,
+                'include' => json_encode([
+                    'Pick Up Service', 'Morning Tea & Coffee', 'Snack', 'Meals', 'Refill Mineral Water', 
+                    'Luxury Private Room', 'Safety Insurance', 'MC & Crew', 'Photo & Video', 
+                    'Sound System', 'Life Jacket', 'First Aid Kit'
+                ]),
+                'exclude' => json_encode([
+                    'Add. Destination', 'Add. Meals', 'Add. Decoration', 'Tipping Crew'
+                ]),
+                'rundown' => json_encode([
+                    ['time' => '05:00', 'activity' => 'Welcome Greeting'],
+                    ['time' => '05:10', 'activity' => 'On Board to Lae-Lae Island'],
+                    ['time' => '05:20', 'activity' => 'Coffee & Tea Break'],
+                    ['time' => '05:30', 'activity' => 'On Board to Center Point of Indonesia'],
+                    ['time' => '05:40', 'activity' => 'Golden Sunrise Time'],
+                    ['time' => '06:10', 'activity' => 'Breakfast'],
+                    ['time' => '06:40', 'activity' => 'Karaoke & Dancing Time'],
+                    ['time' => '07:20', 'activity' => 'Sailing Back to Losari']
+                ]),
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ]);
     }

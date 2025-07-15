@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img/pinisi.png') }}" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -49,40 +49,47 @@
       <div class="header-area">
         <div id="sticky-header" class="main-header-area">
           <div class="container">
-            <div class="header-bottom">
-              <div class="row align-items-center">
-                <div class="col-logo">
-                  <div class="logo">
-                    <a href="{{ route('home') }}">
-                      <img src="{{ asset('frontend/img/phinisi/logo-header.png') }}" alt="Logo Pinisi Hakata" />
-                    </a>
-                  </div>
-                </div>
-                <div class="col-nav">
-                  <nav class="main-menu d-none d-lg-block">
-                    <ul id="navigation">
-                      <li><a href="{{ route('home') }}">Home</a></li>
-                      <li><a href="{{ route('profile') }}">Profile</a></li>
-                      <li><a href="{{ route('package') }}">Package</a></li>
-                      <li><a href="{{ route('home') }}">Event</a></li>
-                    </ul>
-                  </nav>
-                </div>
-                <div class="col-toggle d-block d-lg-none">
-                  <button class="mobile-toggle"><span></span><span></span><span></span></button>
-                </div>
+            <div class="header-bottom d-flex align-items-center justify-content-between">
+              <!-- Logo -->
+              <div class="logo">
+                <a href="{{ route('home') }}">
+                  <img src="{{ asset('frontend/img/phinisi/logo-header.png') }}" alt="Logo Pinisi Hakata" />
+                </a>
+              </div>
+              <!-- Desktop Menu -->
+              <nav class="main-menu d-none d-lg-block">
+                <ul id="navigation" class="d-flex">
+                  <li><a href="{{ route('home') }}">Home</a></li>
+                  <li><a href="{{ route('profile') }}">Profile</a></li>
+                  <li><a href="{{ route('package') }}">Package</a></li>
+                  {{-- <li><a href="{{ route('home') }}">Event</a></li> --}}
+                </ul>
+              </nav>
+              <!-- Mobile Toggle Button -->
+              <div class="mobile-toggle d-block d-lg-none">
+                <button id="btn-mobile-toggle">
+                  <span></span><span></span><span></span>
+                </button>
               </div>
             </div>
+          </div>
+          <!-- Mobile Off‑Canvas Menu -->
+          <div id="mobile-menu" class="mobile-menu d-lg-none">
+            <ul>
+              <li><a href="{{ route('home') }}">Home</a></li>
+              <li><a href="{{ route('profile') }}">Profile</a></li>
+              <li><a href="{{ route('package') }}">Package</a></li>
+              <li><a href="{{ route('home') }}">Event</a></li>
+            </ul>
           </div>
         </div>
       </div>
     </header>
-    
     <!-- header-end -->
 
     @yield('content')
 
-    <footer class="footer bg-navy text-light pt-5">
+    <footer class="footer bg-navy text-light">
       <div class="footer_top pb-4">
         <div class="container">
           <div class="row gy-4">
@@ -241,6 +248,50 @@
         }, 600); // delay sedikit lebih panjang dari durasi transition
       });
     </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const btnToggle = document.getElementById('btn-mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+    
+        btnToggle.addEventListener('click', function() {
+          mobileMenu.classList.toggle('active');
+        });
+    
+        // (Opsional) tutup menu saat klik link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+          });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const header = document.getElementById('sticky-header');
+        const shrinkThreshold = 50;  // scrollY > 50px → shrink
+    
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          
+          // Tambahkan kelas sticky begitu mulai scroll (opsional)
+          if (scrollTop > 0) {
+            header.classList.add('sticky');
+          } else {
+            header.classList.remove('sticky');
+          }
+    
+          // Tambahkan kelas shrink saat melewati threshold
+          if (scrollTop > shrinkThreshold) {
+            header.classList.add('shrink');
+          } else {
+            header.classList.remove('shrink');
+          }
+        });
+      });
+    </script>
+    
+    
+    
     
 
   

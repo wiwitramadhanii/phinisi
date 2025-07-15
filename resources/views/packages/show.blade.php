@@ -2,7 +2,7 @@
 
 @section('content')
 
-@php
+{{-- @php
         // Ambil semua path gambar dari relasi documentations
         $allImages = $documentations->pluck('file_path')->toArray();
 
@@ -12,11 +12,22 @@
         // Gambar kecil: ambil elemen 1–4, lalu pad supaya selalu ada 4 item
         $smallImages = array_slice($allImages, 1, 4);
         $smallImages = array_pad($smallImages, 4, null);
+@endphp --}}
+@php
+  // Ambil, lalu ratakan (flatten) semua file_path
+  $allImages = collect($documentations)
+                 ->flatMap(fn($doc) => $doc->file_path ?? [])
+                 ->toArray();
+
+  $bigImage    = $allImages[0]               ?? null;
+  $smallImages = array_slice($allImages, 1, 4);
+  $smallImages = array_pad($smallImages, 4, null);
 @endphp
+
 
 <div class="package_details_info">
     <div class="header_package_area">
-        <div class="row custom-gap gy-2">  {{-- gx-3 = gutter-X ~1rem; gy-2 = gutter-Y 0.5rem --}}
+        <div class="row custom-gap gy-2"> 
             {{-- KIRI: gambar besar --}}
             <div class="col-md-6">
               @if($bigImage)
@@ -35,7 +46,6 @@
                 </div>
               @endif
             </div>
-          
             {{-- KANAN: 2×2 grid --}}
             <div class="col-md-6">
                 <div class="row custom-gap gy-2">  {{-- g-1 = 0.25rem horizontal gap --}}
@@ -64,11 +74,8 @@
                     </div>
                   @endforeach
                 </div>
-              </div>
-              
-        </div>
-          
-          
+            </div>
+        </div>  
     </div>
     <div class="info-container">
         <div class="header-container">

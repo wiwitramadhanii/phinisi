@@ -9,7 +9,7 @@
           <div class="card shadow-sm">
             <div class="card-header bg-gradient-primary text-white d-flex align-items-center">
               <i class="bi bi-receipt-cutoff me-2 fs-4"></i>
-              <h5 class="mb-0">Detail Pemesanan</h5>
+              <h5 class="mb-0 text-white">Detail Pemesanan</h5>
             </div>
             <div class="card-body">
               <ul class="list-unstyled mb-0">
@@ -51,7 +51,7 @@
           <div class="card shadow-sm">
             <div class="card-header bg-gradient-success text-white d-flex align-items-center">
               <i class="bi bi-credit-card-2-front-fill me-2 fs-4"></i>
-              <h5 class="mb-0">Informasi Pembayaran</h5>
+              <h5 class="mb-0 text-white">Informasi Pembayaran</h5>
             </div>
             <div class="card-body">
               <!-- Bank Mandiri -->
@@ -97,7 +97,15 @@
     <style>
       .payment-area {
         padding: 50px 0;
-        background: #f1f5f9;
+        background: #f8f9fa;
+      }
+      @media (max-width: 991.98px) {
+        .payment-area {
+          padding-top: calc(60px + 40px);
+          padding-left: 1rem;
+          padding-right: 1rem;
+          box-sizing: border-box;
+        }
       }
       .card {
         border: none;
@@ -106,6 +114,7 @@
       }
       .card-header {
         padding: 1rem 1.5rem;
+        background: navy;
       }
       .bank-logo {
         width: 60px;

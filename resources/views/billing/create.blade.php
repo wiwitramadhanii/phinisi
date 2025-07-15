@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+
 <div class="billing-area">
     <div class="container">
       <div class="row gx-5">
@@ -8,7 +9,7 @@
         <div class="col-lg-6">
           <div class="card billing-card">
             <div class="card-header text-white">
-              <h4 class="mb-0 text-white"><i class="bi bi-person-square me-2"></i>Form Data Diri</h3>
+              <h4 class="mb-0 text-white"><i class="bi bi-person-square me-2"></i>Personal Data Form</h3>
             </div>
             <div class="card-body">
               <form action="{{ route('bookings.store') }}" method="POST">
@@ -21,12 +22,12 @@
   
                 <div class="mb-3">
                   <label for="name"  class="form-label">Full Name</label>
-                  <input type="text" name="name" id="name" class="form-control shadow-sm" placeholder="Masukkan nama lengkap" required>
+                  <input type="text" name="name" id="name" class="form-control shadow-sm" placeholder="Enter Full Name" required>
                 </div>
   
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" name="email" id="email" class="form-control shadow-sm" placeholder="contoh@domain.com" required>
+                  <input type="email" name="email" id="email" class="form-control shadow-sm" placeholder="example@domain.com" required>
                 </div>
   
                 <div class="mb-3">
@@ -38,25 +39,17 @@
                     <label for="pax" class="form-label">Number of Pax</label>
                     <div class="input-group pax-spinner" style="max-width: 160px;">
                       <button type="button" class="btn btn-outline-secondary" id="pax-decrease">–</button>
-                      <input
-                        type="text"
-                        name="num_pax"
-                        id="pax"
-                        class="form-control text-center shadow-sm"
-                        value="{{ $minPax }}"
-                        readonly
-                        required
-                      >
+                      <input type="text" name="num_pax" id="pax" class="form-control text-center shadow-sm" value="{{ $minPax }}" readonly required>
                       <button type="button" class="btn btn-outline-secondary" id="pax-increase">+</button>
                     </div>
-                  </div>
+                </div>
   
                 <div class="mb-4">
                   <label class="form-label">Total Price:</label>
                   <p id="display_total_price" class="fs-4 text-primary fw-bold">Rp 0</p>
                 </div>
   
-                <button type="submit" class="btn btn-gradient w-100 py-2 text-white">Checkout Sekarang</button>
+                <button type="submit" class="btn btn-gradient w-100 py-2 text-white">Checkout Now</button>
               </form>
             </div>
           </div>
@@ -84,10 +77,10 @@
     <!-- Styles -->
     <style>
       .billing-area {
+        padding-top: calc(70px + 50px); 
         padding: 50px 0;
         background: #f8f9fa;
       }
-  
       .billing-card, .detail-card {
         border: none;
         border-radius: 12px;
@@ -102,12 +95,11 @@
       .billing-area h5 {
         font-size: 10px;
       }
-  
       .billing-card .form-control {
         border-radius: 6px;
         transition: transform 0.2s, box-shadow 0.2s;
+        background: rgb(237, 235, 235);
       }
-  
       .billing-card .form-control:focus {
         transform: translateY(-2px);
         box-shadow: 0 2px 8px rgba(0,153,255,0.3);
@@ -129,9 +121,16 @@
         display: flex;
         align-items: center;
       }
+      .detail-card .list-unstyled li strong {
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
   
       .detail-card .list-unstyled li i {
         font-size: 1.2rem;
+      }
+      #pax {
+        color: black;
       }
       .pax-spinner .btn {
         width: 40px;
@@ -142,6 +141,41 @@
       .pax-spinner .form-control {
         border-left: none;
         border-right: none;
+      }
+      @media (max-width: 991.98px) {
+        .billing-area .container {
+          margin: 70px auto 0;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          box-sizing: border-box;
+        }
+        .billing-area .row {
+          --bs-gutter-x: 1rem;
+          flex-direction: column;
+          padding: 1rem;
+        }
+        .billing-area .col-lg-6 {
+          max-width: 100%;
+          flex: 0 0 100%;
+          margin-bottom: 1.5rem;
+        }
+      }
+      @media (max-width: 575.98px) {
+        .billing-area {
+          padding: 30px 0;
+        }
+        .billing-card .card-header h4, .detail-card .card-title {
+          font-size: 1.125rem;
+        }
+        .billing-card .mb-3 label, .billing-card .form-control, .detail-card .list-unstyled li {
+          font-size: 0.9rem;
+        }
+        .pax-spinner {
+          max-width: 100%;
+        }    
+        .pax-spinner .btn {
+          width: 32px;
+        }
       }
     </style>
   

@@ -46,12 +46,20 @@
                       <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $documentation->package->name ?? $documentation->package_id }}</td>
+                        {{-- <td>
+                          <img src="{{ asset('storage/' . $documentation->file_path) }}" width="100" class="img-thumbnail" alt="Documentation {{ $documentation->id }}">
+                            <a href="{{ asset('storage/' . $documentation->file_path) }}"></a>
+                        </td> --}}
                         <td>
-                          <img src="{{ asset('storage/' . $documentation->file_path) }}"
-                               width="100"
-                               class="img-thumbnail"
-                               alt="Documentation {{ $documentation->id }}">
-                        </td>
+                          <ul class="list-unstyled d-flex flex-wrap gap-2">
+                            @foreach($documentation->file_path ?? [] as $path)
+                              <li>
+                                <img src="{{ asset('storage/' . $path) }}" width="100" class="img-thumbnail" alt="Documentation {{ $documentation->id }}">
+                                  <a href="{{ asset('storage/' . $path) }}"></a>
+                              </li>
+                            @endforeach
+                          </ul>
+                        </td>                        
                         <td>
                           <a href="{{ route('admin.documentations.edit', $documentation->id) }}"
                              class="btn btn-sm btn-primary">

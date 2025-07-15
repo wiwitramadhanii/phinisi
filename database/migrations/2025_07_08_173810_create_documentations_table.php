@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('package_id');
-            $table->string('file_path');
+            $table->json('file_path');
             $table->timestamps();
 
             $table->foreign('package_id')

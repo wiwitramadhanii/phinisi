@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
         
         if (!User::where('email', 'wiwitramadani@gmail.com')->exists()) {
             User::create([
-                'name' => 'Wiwit Ramadhani',
-                'email' => 'wiwitramadani@gmail.com',
-                'password' => Hash::make('12345678'), 
+                'name' => 'Admin',
+                'email' => 'hakata@admin.com',
+                'password' => Hash::make('123'), 
             ]);
         }
     }

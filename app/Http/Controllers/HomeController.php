@@ -15,7 +15,7 @@ class HomeController extends Controller
 {
 
     public function index(){
-        $sliders = Slider::latest()->get();
+        $sliders = Slider::oldest()->get();
         $itineraries = Itinerary::latest()->get();
         $events = Package::all();
         
@@ -25,7 +25,7 @@ class HomeController extends Controller
     
 
     public function package(Request $request){
-        $packages = Package::latest()->get();
+        $packages = Package::oldest()->get();
         $paxCategories = PaxCategory::all();
         $documentations = Documentation::all();
         $date = $request->input('date');
