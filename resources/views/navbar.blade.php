@@ -121,9 +121,18 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li> 
 
           <li class="nav-item">
-            <a href="{{ route('admin.users.index') }}" class="nav-link">
+            <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
               <p>
                 Users
@@ -133,7 +142,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.sliders.index') }}" class="nav-link">
+            <a href="{{ route('admin.sliders.index') }}" class="nav-link {{ request()->routeIs('admin.sliders.index') ? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Slider
@@ -142,7 +151,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.itineraries.index') }}" class="nav-link">
+            <a href="{{ route('admin.itineraries.index') }}" class="nav-link {{ request()->routeIs('admin.itineraries.index') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Itinerary
@@ -151,7 +160,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('packages.index') }}" class="nav-link">
+            <a href="{{ route('packages.index') }}" class="nav-link {{ request()->routeIs('packages.index') ? 'active' : '' }}">
               <i class="nav-icon fas fa-rocket"></i>
               <p>
                 Package
@@ -160,7 +169,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.documentations.index') }}" class="nav-link">
+            <a href="{{ route('admin.documentations.index') }}" class="nav-link {{ request()->routeIs('admin.documentations.index') ? 'active' : '' }}">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Documentation
@@ -169,7 +178,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('paxCategories.index') }}" class="nav-link">
+            <a href="{{ route('paxCategories.index') }}" class="nav-link {{ request()->routeIs('paxCategories.index') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users-cog"></i>
               <p>
                  Pax Category
@@ -178,7 +187,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('admin.bookings.index') }}" class="nav-link">
+            <a href="{{ route('admin.bookings.index') }}" class="nav-link {{ request()->routeIs('admin.bookings.index') ? 'active' : '' }}">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Booking

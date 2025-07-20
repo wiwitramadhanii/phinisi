@@ -51,7 +51,7 @@
                                     <td>{{ $booking->name }}</td>
                                     <td>{{ $booking->email }}</td>
                                     <td>{{ $booking->phone }}</td>
-                                    <td>{{ $booking->selected_date }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($booking->selected_date)->format('d M Y') }}</td>
                                     <td>{{ $booking->pax_category }}</td>
                                     <td>{{ $booking->num_pax }}</td>
                                     <td>Rp {{ number_format($booking->total_price, 0, ',', '.') }}</td>

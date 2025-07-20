@@ -15,6 +15,9 @@ class BookingController extends Controller
         $bookings = Booking::all();
         $paxCategories = PaxCategory::all();
         $bookings = Booking::with('package')->get();
+        $bookings = Booking::with('package')->orderBy('is_already_pay', 'asc')
+                                            ->orderBy('selected_date', 'asc')
+                                            ->get();
         return view('admin.bookings.index', compact('bookings', 'paxCategories'));
     }
 

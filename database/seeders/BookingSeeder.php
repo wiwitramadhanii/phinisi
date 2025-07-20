@@ -30,14 +30,14 @@ class BookingSeeder extends Seeder
         DB::table('bookings')->truncate();
 
         // Buat 10 contoh booking
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 40; $i++) {
             $package    = $packages->random();
             $paxCat     = $paxCategories->random();
             // generate jumlah pax antara min dan max kategori
             [$min, $max] = explode('-', $paxCat->pax_range);
             $numPax     = rand((int)$min, (int)$max);
             $date       = Carbon::today()->addDays(rand(1, 60))->format('Y-m-d');
-
+            
             Booking::create([
                 'package_id'    => $package->id,
                 'name'          => fake()->name(),
@@ -47,10 +47,10 @@ class BookingSeeder extends Seeder
                 'pax_category'  => $paxCat->pax_range,
                 'num_pax'       => $numPax,
                 'total_price'   => $paxCat->price_per_pax * $numPax,
-                'is_already_pay' => 0,
+                'is_already_pay' => rand(0, 1),
             ]);
         }
 
-        $this->command->info('Seeder Booking: 3 record berhasil dibuat.');
+        $this->command->info('Seeder Booking: 40 record berhasil dibuat.');
     }
 }

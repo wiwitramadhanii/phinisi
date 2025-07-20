@@ -67,7 +67,7 @@ class PaxCategorySeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'package_id' => 3,
+                'package_id' => 4,
                 'pax_range' => '10-14',
                 'price_per_pax' => 1090000.00,
                 'created_at' => now(),
@@ -75,53 +75,53 @@ class PaxCategorySeeder extends Seeder
             ],
             [
                 'package_id' => 3,
-                'pax_range' => '15-19',
-                'price_per_pax' => 790000.00,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'package_id' => 3,
-                'pax_range' => '20-24',
-                'price_per_pax' => 690000.00,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'package_id' => 3,
-                'pax_range' => '25-50',
-                'price_per_pax' => 590000.00,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'package_id' => 4,
                 'pax_range' => '10-14',
                 'price_per_pax' => 479000.00,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'package_id' => 4,
+                'package_id' => 3,
                 'pax_range' => '15-19',
                 'price_per_pax' => 359000.00,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'package_id' => 4,
+                'package_id' => 3,
                 'pax_range' => '20-24',
                 'price_per_pax' => 309000.00,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'package_id' => 4,
+                'package_id' => 3,
                 'pax_range' => '25-50',
                 'price_per_pax' => 249000.00,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'package_id' => 4,
+                'pax_range' => '15-19',
+                'price_per_pax' => 790000.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'package_id' => 4,
+                'pax_range' => '20-24',
+                'price_per_pax' => 690000.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'package_id' => 4,
+                'pax_range' => '25-50',
+                'price_per_pax' => 590000.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 }

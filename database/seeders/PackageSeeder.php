@@ -71,33 +71,6 @@ class PackageSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'package_name' => 'Full Day Kodingareng',
-                'image' => 'packages/fullday.png',
-                'time' => '08:00-20:00',
-                'route' => 'Losari - Kodingareng Keke',
-                'pax' => '10-50',
-                'min_price' => 590000,
-                'include' => json_encode([
-                    'Pick Up Service', 'Welcome Drink', 'Snack', 'Standart Soundsystem', 'Live Accoustic', 'Seafood Meals Bbq',
-                    'Free Dessert', 'Free Flow Mineral Water', 'Luxury Private Room with AC', 'Free Video Creative (Min. 1-3 Duration)',
-                    'SpeedBoat(Return Transfer)', 'Tour Leader & Crew', 'Photo & Video Crew', 
-                    'Snorkeling Gear 6 set at Samalona/Kodingareng Keke', 'Standart Prasmanan', 'Mini Games Instructor', 
-                    'Life Jacket', 'First Aid Kit', 'Fireworks'
-                ]),
-                'exclude' => json_encode([
-                    'Add. Tour', 'Add. Meals', 'Add. Decoration (Based on Request)', 'Tipping Crew'
-                ]),
-                'rundown' => json_encode([
-                    ['time' => '08:00', 'activity' => 'Keberangkatan dari dermaga menuju Pulau Kodingareng'],
-                    ['time' => '10:00', 'activity' => 'Snorkeling dan eksplorasi bawah laut'],
-                    ['time' => '12:00', 'activity' => 'Makan siang di pulau'],
-                    ['time' => '14:00', 'activity' => 'Jelajah pantai dan berfoto'],
-                    ['time' => '16:00', 'activity' => 'Kembali ke dermaga']
-                ]),
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'package_name' => 'Golden Sunrise Cruise',
                 'image' => 'packages/gsc.jpg',
                 'time' => '05:00-07:30',
@@ -121,6 +94,33 @@ class PackageSeeder extends Seeder
                     ['time' => '06:10', 'activity' => 'Breakfast'],
                     ['time' => '06:40', 'activity' => 'Karaoke & Dancing Time'],
                     ['time' => '07:20', 'activity' => 'Sailing Back to Losari']
+                ]),
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'package_name' => 'Full Day Kodingareng',
+                'image' => 'packages/fullday.png',
+                'time' => '08:00-20:00',
+                'route' => 'Losari - Kodingareng Keke',
+                'pax' => '10-50',
+                'min_price' => 590000,
+                'include' => json_encode([
+                    'Pick Up Service', 'Welcome Drink', 'Snack', 'Standart Soundsystem', 'Live Accoustic', 'Seafood Meals Bbq',
+                    'Free Dessert', 'Free Flow Mineral Water', 'Luxury Private Room with AC', 'Free Video Creative (Min. 1-3 Duration)',
+                    'SpeedBoat(Return Transfer)', 'Tour Leader & Crew', 'Photo & Video Crew', 
+                    'Snorkeling Gear 6 set at Samalona/Kodingareng Keke', 'Standart Prasmanan', 'Mini Games Instructor', 
+                    'Life Jacket', 'First Aid Kit', 'Fireworks'
+                ]),
+                'exclude' => json_encode([
+                    'Add. Tour', 'Add. Meals', 'Add. Decoration (Based on Request)', 'Tipping Crew'
+                ]),
+                'rundown' => json_encode([
+                    ['time' => '08:00', 'activity' => 'Keberangkatan dari dermaga menuju Pulau Kodingareng'],
+                    ['time' => '10:00', 'activity' => 'Snorkeling dan eksplorasi bawah laut'],
+                    ['time' => '12:00', 'activity' => 'Makan siang di pulau'],
+                    ['time' => '14:00', 'activity' => 'Jelajah pantai dan berfoto'],
+                    ['time' => '16:00', 'activity' => 'Kembali ke dermaga']
                 ]),
                 'created_at' => now(),
                 'updated_at' => now()

@@ -30,7 +30,7 @@ class DocumentationSeeder extends Seeder
             [
                 'package_id' => 3,
                 'file_path' => json_encode([
-                    'documentations/fullday.png', 'documentations/outing.png', 'documentations/dinner.png', 'documentations/snorkeling.png', 'documentations/lunch.png'
+                    'documentations/gsc.jpg', 'documentations/gsc2.png', 'documentations/coffee.png', 'documentations/breakfast.png', 'documentations/karaoke.png'
                 ]),
                 'created_at' => now(),
                 'updated_at' => now()
@@ -38,7 +38,7 @@ class DocumentationSeeder extends Seeder
             [
                 'package_id' => 4,
                 'file_path' => json_encode([
-                    'documentations/gsc.jpg', 'documentations/gsc2.png', 'documentations/coffee.png', 'documentations/breakfast.png', 'documentations/karaoke.png'
+                    'documentations/fullday.png', 'documentations/outing.png', 'documentations/dinner.png', 'documentations/snorkeling.png', 'documentations/lunch.png'
                 ]),
                 'created_at' => now(),
                 'updated_at' => now()

@@ -79,34 +79,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(data => {
-                const bookings = data.bookings;
+                const bookings = data.bookings; // e.g. { "1": [...], "2": [...], "3": [...], "4": [...] }
                 const eventList = document.getElementById('eventList');
                 eventList.innerHTML = ''; // Bersihkan daftar event sebelumnya
-
-                const package3Booked = bookings['3'] && bookings['3'].length > 0;
-                const package1Or2Booked =
-                    (bookings['1'] && bookings['1'].length > 0) ||
-                    (bookings['2'] && bookings['2'].length > 0);
-
+    
+                // Cek status booking
+                const fullDayBooked = bookings['4'] && bookings['4'].length > 0;                // Full Day Trip (ID 4)
+                const morningGroupIds = ['1','2','3'];                                         // IDs paket pagi
+                const anyMorningBooked = morningGroupIds.some(id => bookings[id] && bookings[id].length > 0);
+    
                 events.forEach(event => {
-                    let isBooked = bookings[event.id] && bookings[event.id].length > 0;
-
-                    if (event.id == 3) {
-                        isBooked = isBooked || package1Or2Booked;
+                    const id = String(event.id);
+                    const selfBooked = bookings[id] && bookings[id].length > 0;
+    
+                    let isBooked;
+                    if (fullDayBooked) {
+                        // Jika Full Day Trip terpesan: semua paket full
+                        isBooked = true;
+                    } else if (id === '4') {
+                        // Jika event adalah Full Day Trip & ada salah satu pagi terpesan: full
+                        isBooked = anyMorningBooked;
+                    } else {
+                        // Paket pagi (1–3) hanya full jika sendiri terpesan
+                        isBooked = selfBooked;
                     }
-                    if (event.id == 1 || event.id == 2) {
-                        isBooked = isBooked || package3Booked;
-                    }
-
+    
                     const li = document.createElement('li');
                     li.classList.add('event-info', 'mb-3', 'p-2', 'border', 'rounded');
-
                     li.innerHTML = `
-                        <a href="/packages/${event.id}" class="paket-name h6 mb-2">${event.package_name}</a>
+                        <a href="/packages/${id}" class="paket-name h6 mb-2">${event.package_name}</a>
                         <div class="paket-time mb-1" style="font-size: 13px">Time: ${event.time}</div>
                         <div class="paket-route mb-2" style="font-size: 13px">Route: ${event.route}</div>
                         ${
-                            isBooked 
+                            isBooked
                             ? '<div class="bg-danger text-white p-2 rounded" style="font-size: 15px">This package is already booked for this date.</div>'
                             : '<div class="bg-success text-white p-2 rounded" style="font-size: 15px">This package is available for this date.</div>'
                         }
@@ -116,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error('Error fetching booking info:', error));
     }
+    
 
     // Navigasi ke bulan sebelumnya
     document.getElementById('prevMonth').addEventListener('click', function () {
