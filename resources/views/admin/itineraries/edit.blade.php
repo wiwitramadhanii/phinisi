@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                       <label for="subtitle">Subtitle</label>
-                      <input type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" value="{{ old('subtitle') }}" placeholder="Enter Subtitle">
+                      <input type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" value="{{ old('subtitle', $itinerary->subtitle) }}" placeholder="Enter Subtitle">
                     </div>
                     <!-- error message untuk subtitle -->
                     @error('subtitle')

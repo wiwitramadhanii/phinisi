@@ -60,13 +60,13 @@
                           <td>{{ $user->email }}</td>
                           <td>
                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Edit</a>
-                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                            {{-- <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                   <i class="fas fa-trash"></i> Delete
                               </button>
-                            </form>
+                            </form> --}}
                         </td>
                         </tr>
                       @endforeach

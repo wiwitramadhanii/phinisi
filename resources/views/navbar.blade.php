@@ -88,8 +88,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="{{ asset('backend/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <img src="{{ asset('frontend/img/pinisi.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Pinisi Hakata</span>
     </a>
 
     <!-- Sidebar -->
@@ -131,15 +131,14 @@
             </a>
           </li> 
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
               <p>
                 Users
-                {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a href="{{ route('admin.sliders.index') }}" class="nav-link {{ request()->routeIs('admin.sliders.index') ? 'active' : '' }}">

@@ -36,13 +36,9 @@
                         @method('put')
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="package_id">Package</label>
-                                <select name="package_id" id="package_id" class="form-control" required>
-                                    <option value="">Select Package</option> 
-                                    @foreach ($packages as $package)
-                                        <option value="{{ $package->package_id }}">{{ $package->package_name }}</option>
-                                    @endforeach
-                                </select>
+                              <label for="package_id">Package</label>
+                              <input type="hidden" name="package_id" value="{{ $paxCategory->package_id }}">
+                              <input type="text" class="form-control" value="{{ $packageName }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="pax_range">Pax Range</label>

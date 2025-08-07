@@ -8,23 +8,21 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        // Data dummy, bisa diganti dengan model/database
         $company = [
             'name' => 'Pinisi Hakata',
             'logo' => 'frontend/img/phinisi/logo-header.png',
             'banner' => 'frontend/img/phinisi/bannerphinisi.jpg',
-            'about' => 'Pinisi Hakata adalah perusahaan penyedia paket wisata kapal tradisional Pinisi dengan layanan profesional dan pengalaman tak terlupakan di perairan Sulawesi Selatan.',
-            'vision' => 'Menjadi pelopor wisata bahari berbasis tradisi Indonesia yang unggul dan berkelanjutan.',
+            'about' => 'Pinisi Hakata merupakan penyedia layanan wisata bahari eksklusif dengan menggunakan kapal Pinisi tradisional khas Sulawesi Selatan. Berbasis di Makassar, kami menggabungkan warisan budaya maritim Bugis-Makassar dengan pelayanan modern untuk menghadirkan pengalaman pelayaran yang tak terlupakan di perairan Indonesia Timur, khususnya kepulauan Spermonde dan sekitarnya untuk wisatawan domestik maupun mancanegara.',
+            'vision' => 'Menjadi pelopor wisata bahari berbasis budaya di Indonesia dengan menghadirkan kapal Pinisi sebagai ikon kebanggaan maritim nasional.',
             'mission' => [
-                'Menyuguhkan pengalaman wisata laut autentik dengan kapal Pinisi.',
-                'Memberdayakan masyarakat lokal melalui pariwisata berkelanjutan.',
-                'Menjaga kelestarian budaya maritim Indonesia.',
+                'Menawarkan layanan wisata bahari premium dengan standar keamanan dan kenyamanan tinggi.',
+                'Mempromosikan kapal Pinisi sebagai warisan budaya dunia kepada wisatawan domestik dan mancanegara.',
+                'Mendukung pemberdayaan ekonomi masyarakat pesisir melalui pariwisata.',
             ],
             'values' => [
-                'Keamanan & Keselamatan',
-                'Pelayanan Prima',
-                'Keaslian Budaya',
-                'Ramah Lingkungan',
+                'Kru Ramah & Berpengalaman',
+                'Standar keselamatan tinggi & Asuransi wisatawan',
+                'Paket fleksibel dan bisa disesuaikan',
             ],
             'contact' => [
                 'address' => 'Anjungan Pantai Losari, Makassar, Sulawesi Selatan',

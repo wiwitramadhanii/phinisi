@@ -31,33 +31,38 @@
               <form action="{{ route('packages.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
-                  {{-- Package fields --}}
-                  <div class="form-group">
-                    <label>Package Name</label>
-                    <input type="text" name="package_name" class="form-control" value="{{ old('package_name') }}" required>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Package Name</label>
+                        <input type="text" name="package_name" class="form-control" value="{{ old('package_name') }}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Time</label>
+                        <input type="text" name="time" class="form-control" value="{{ old('time') }}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Pax</label>
+                        <input type="text" name="pax" class="form-control" value="{{ old('pax') }}" required>
+                      </div>
+                    </div>
+                
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" name="image" class="form-control" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Route</label>
+                        <input type="text" name="route" class="form-control" value="{{ old('route') }}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" name="min_price" class="form-control" value="{{ old('min_price') }}" required>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" name="image" class="form-control" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Time</label>
-                    <input type="text" name="time" class="form-control" value="{{ old('time') }}" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Route</label>
-                    <input type="text" name="route" class="form-control" value="{{ old('route') }}" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Pax</label>
-                    <input type="text" name="pax" class="form-control" value="{{ old('pax') }}" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Price</label>
-                    <input type="number" name="min_price" class="form-control" value="{{ old('min_price') }}" required>
-                  </div>
-
-                  {{-- Dynamic Include --}}
+              
                   <div class="form-group">
                     <label>Include Items</label>
                     <div id="include-list">
@@ -70,10 +75,9 @@
                     </div>
                     <button id="add-include" class="btn btn-secondary btn-sm" type="button">+ Add Include</button>
                   </div>
-
-                  {{-- Dynamic Exclude --}}
+                
                   <div class="form-group">
-                    <label>Exclude Items</nabel>
+                    <label>Exclude Items</label>
                     <div id="exclude-list">
                       <div class="input-group mb-2">
                         <input type="text" name="exclude[]" class="form-control" placeholder="Item excluded" required>
@@ -84,8 +88,7 @@
                     </div>
                     <button id="add-exclude" class="btn btn-secondary btn-sm" type="button">+ Add Exclude</button>
                   </div>
-
-                  {{-- Dynamic Rundown --}}
+                
                   <div class="form-group">
                     <label>Rundown Schedule</label>
                     <div id="rundown-list">
@@ -104,6 +107,7 @@
                     <button id="add-rundown" class="btn btn-secondary btn-sm" type="button">+ Add Rundown</button>
                   </div>
                 </div>
+                
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

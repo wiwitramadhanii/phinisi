@@ -30,81 +30,108 @@
               </div>
               <form action="{{ route('packages.update', $package->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="card-body">
-                  {{-- Package fields --}}
-                  <div class="form-group">
-                    <label>Package Name</label>
-                    <input type="text" name="package_name" class="form-control" value="{{ old('package_name', $package->package_name) }}" required>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Package Name</label>
+                        <input type="text" name="package_name" class="form-control" value="{{ old('package_name', $package->package_name) }}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Time</label>
+                        <input type="text" name="time" class="form-control" value="{{ old('time', $package->time) }}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Pax</label>
+                        <input type="text" name="pax" class="form-control" value="{{ old('pax', $package->pax) }}" required>
+                      </div>
+                    </div>
+                
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" name="image" class="form-control" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Route</label>
+                        <input type="text" name="route" class="form-control" value="{{ old('route', $package->route) }}" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" name="min_price" class="form-control" value="{{ old('min_price', $package->min_price) }}" required>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" name="image" class="form-control" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Time</label>
-                    <input type="text" name="time" class="form-control" value="{{ old('time',$package->time) }}" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Route</label>
-                    <input type="text" name="route" class="form-control" value="{{ old('route', $package->route) }}" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Pax</label>
-                    <input type="text" name="pax" class="form-control" value="{{ old('pax', $package->pax) }}" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Price</label>
-                    <input type="number" name="min_price" class="form-control" value="{{ old('min_price', $package->min_price) }}" required>
-                  </div>
-
-                  {{-- Dynamic Include --}}
+              
                   <div class="form-group">
                     <label>Include Items</label>
                     <div id="include-list">
-                      <div class="input-group mb-2">
-                        <input type="text" name="include[]" class="form-control" placeholder="Item included" >
-                        <div class="input-group-append">
-                          <button class="btn btn-danger remove-include" type="button">&times;</button>
-                        </div>
-                      </div>
+                      @foreach(old('include', $package->include ?? []) as $item)
+                          <div class="input-group mb-2">
+                              <input type="text" name="include[]" class="form-control" placeholder="Item included" value="{{ $item }}" required>
+                              <div class="input-group-append">
+                                  <button class="btn btn-danger remove-include" type="button">&times;</button>
+                              </div>
+                          </div>
+                      @endforeach
                     </div>
                     <button id="add-include" class="btn btn-secondary btn-sm" type="button">+ Add Include</button>
                   </div>
-
-                  {{-- Dynamic Exclude --}}
+                
                   <div class="form-group">
-                    <label>Exclude Items</nabel>
+                    <label>Exclude Items</label>
                     <div id="exclude-list">
-                      <div class="input-group mb-2">
-                        <input type="text" name="exclude[]" class="form-control" placeholder="Item excluded" >
-                        <div class="input-group-append">
-                          <button class="btn btn-danger remove-exclude" type="button">&times;</button>
-                        </div>
-                      </div>
+                      @foreach(old('exclude', $package->exclude ?? []) as $item)
+                          <div class="input-group mb-2">
+                              <input type="text" name="exclude[]" class="form-control" placeholder="Item Exclude" value="{{ $item }}" required>
+                              <div class="input-group-append">
+                                  <button class="btn btn-danger remove-exclude" type="button">&times;</button>
+                              </div>
+                          </div>
+                      @endforeach
                     </div>
                     <button id="add-exclude" class="btn btn-secondary btn-sm" type="button">+ Add Exclude</button>
                   </div>
-
-                  {{-- Dynamic Rundown --}}
+                
                   <div class="form-group">
                     <label>Rundown Schedule</label>
                     <div id="rundown-list">
-                      <div class="form-row mb-2">
-                        <div class="col-3">
-                          <input type="time" name="rundown[0][time]" class="form-control" >
-                        </div>
-                        <div class="col-8">
-                          <input type="text" name="rundown[0][activity]" class="form-control" placeholder="Activity" >
-                        </div>
-                        <div class="col-1">
-                          <button class="btn btn-danger remove-rundown" type="button">&times;</button>
-                        </div>
-                      </div>
+                        @php
+                            $rundownData = old('rundown', $package->rundown ?? []);
+                        @endphp
+                
+                        @forelse($rundownData as $index => $item)
+                            <div class="form-row mb-2">
+                                <div class="col-3">
+                                    <input type="time" name="rundown[{{ $index }}][time]" class="form-control"
+                                           value="{{ $item['time'] ?? '' }}" required>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" name="rundown[{{ $index }}][activity]" class="form-control"
+                                           placeholder="Activity" value="{{ $item['activity'] ?? '' }}" required>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-danger remove-rundown" type="button">&times;</button>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="form-row mb-2">
+                                <div class="col-3">
+                                    <input type="time" name="rundown[0][time]" class="form-control" required>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" name="rundown[0][activity]" class="form-control" placeholder="Activity" required>
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-danger remove-rundown" type="button">&times;</button>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                     <button id="add-rundown" class="btn btn-secondary btn-sm" type="button">+ Add Rundown</button>
                   </div>
                 </div>
+                
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

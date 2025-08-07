@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil Perusahaan Pinisi Hakata</title>
+  <title>Company Profile Pinisi Hakata</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- FontAwesome -->
@@ -51,6 +51,9 @@
     #about img {
       border-radius: 0.75rem;
       object-fit: cover;
+      align-items: center;
+      width: 240px;
+      height: 240px;
     }
 
     /* Cards */
@@ -94,7 +97,7 @@
     <div class="hero mb-5">
       <div class="overlay"></div>
       <div class="hero-content d-flex flex-column justify-content-center align-items-start h-100 px-4" data-aos="fade-up">
-        <img src="{{ asset($company['logo']) }}" alt="Logo {{ $company['name'] }}" class="mb-3" style="width: 120px;">
+        <img src="{{ asset($company['logo']) }}" alt="Logo {{ $company['name'] }}" class="mb-3" style="width: 100px;">
         <h1 class="display-3">{{ $company['name'] }}</h1>
         <p class="lead w-75 mt-3">{{ Str::limit($company['about'], 180) }}</p>
         <a href="#about" class="btn btn-lg btn-outline-light mt-4">Selengkapnya</a>
@@ -104,10 +107,10 @@
     <!-- About -->
     <section id="about" class="row align-items-center mb-5" data-aos="fade-right">
       <div class="col-lg-6 mb-4 mb-lg-0">
-        <img src="{{ asset('images/about-illustration.svg') }}" alt="About {{ $company['name'] }}" class="img-fluid shadow-sm">
+        <img src="{{ asset('frontend/img/information.png') }}" alt="About {{ $company['name'] }}" class="img-fluid shadow-sm">
       </div>
       <div class="col-lg-6" data-aos="fade-left">
-        <h2 class="mb-4">Tentang Kami</h2>
+        <h2 class="mb-4">About Us</h2>
         <p class="text-muted">{{ $company['about'] }}</p>
       </div>
     </section>
@@ -118,7 +121,7 @@
         <div class="card border-0 shadow-sm h-100">
           <div class="card-body text-center p-5">
             <i class="fas fa-eye fa-3x text-primary mb-3"></i>
-            <h3 class="card-title mb-3">Visi</h3>
+            <h3 class="card-title mb-3">Vision</h3>
             <p class="card-text text-muted">{{ $company['vision'] }}</p>
           </div>
         </div>
@@ -127,7 +130,7 @@
         <div class="card border-0 shadow-sm h-100">
           <div class="card-body p-5">
             <i class="fas fa-bullseye fa-3x text-success mb-3 d-block text-center"></i>
-            <h3 class="card-title mb-3 text-center">Misi</h3>
+            <h3 class="card-title mb-3 text-center">Mision</h3>
             <ul class="list-unstyled text-muted">
               @foreach ($company['mission'] as $m)
               <li class="mb-2"><i class="fas fa-check-circle text-success mr-2"></i>{{ $m }}</li>
@@ -140,8 +143,8 @@
 
     <!-- Core Values -->
     <section class="mb-5" data-aos="fade-up">
-      <h2 class="text-center mb-4">Nilai Inti</h2>
-      <div class="row">
+      <h2 class="text-center mb-4">Why Choose Us</h2>
+      <div class="row justify-content-center">
         @foreach ($company['values'] as $value)
         <div class="col-6 col-lg-3 mb-4" data-aos="flip-left">
           <div class="card values-card border-0 shadow-sm h-100 text-center py-5">
@@ -154,7 +157,7 @@
 
     <!-- Contact -->
     <section class="mb-5" data-aos="fade-up">
-      <h2 class="mb-4 text-center">Hubungi Kami</h2>
+      <h2 class="mb-4 text-center">Contact Us</h2>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="card border-0 shadow-sm p-4">

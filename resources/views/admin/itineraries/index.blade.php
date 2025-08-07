@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Itinerary Data</h1>
+            <h1 class="m-0">Itinerary's Data</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -51,10 +51,10 @@
                             <td>{{ $itinerary->subtitle }}</td>
                             <td>
                                 <a href="{{ route('admin.itineraries.edit', $itinerary->id) }}" class="btn btn-primary"><i class="fas fa-pen"></i> Edit</a>
-                                <form action="{{ route('admin.itineraries.destroy', $itinerary->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                <form id="delete-form-{{ $itinerary->id }}" action="{{ route('admin.itineraries.destroy', $itinerary->id) }}" method="POST" style="display:inline;">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $itinerary->id }})">Delete</button>
                                 </form>
                             </td>
                         </tr> 
@@ -70,6 +70,24 @@
     </section>
     <!-- /.content -->
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function confirmDelete(id) {
+      Swal.fire({
+          title: 'Apakah kamu yakin?',
+          text: "Data itinerary ini akan dihapus permanen!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Ya, hapus!',
+          cancelButtonText: 'Batal'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              document.getElementById('delete-form-' + id).submit();
+          }
+      });
+  }
+</script>
 @endsection
 

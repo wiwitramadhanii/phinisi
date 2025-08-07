@@ -227,9 +227,7 @@
                 <tbody>
                   @foreach($monthlyRevenueDetailed as $ym => $rev)
                     @php
-                      // pisah 'YYYY-MM'
                       [$year, $monthNum] = explode('-', $ym);
-                      // ubah nomor bulan ke nama (misal '07' → 'Jul')
                       $monthName = \Carbon\Carbon::createFromDate($year, $monthNum, 1)
                                       ->translatedFormat('F');
                     @endphp

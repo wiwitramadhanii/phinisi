@@ -9,12 +9,12 @@
           <div class="card shadow-sm">
             <div class="card-header bg-gradient-primary text-white d-flex align-items-center">
               <i class="bi bi-receipt-cutoff me-2 fs-4"></i>
-              <h5 class="mb-0 text-white">Detail Pemesanan</h5>
+              <h5 class="mb-0 text-white">Order Detail</h5>
             </div>
             <div class="card-body">
               <ul class="list-unstyled mb-0">
                 <li class="d-flex justify-content-between mb-2">
-                  <strong>Nama:</strong> <span>{{ $booking->name }}</span>
+                  <strong>Name:</strong> <span>{{ $booking->name }}</span>
                 </li>
                 <li class="d-flex justify-content-between mb-2">
                   <strong>Email:</strong> <span>{{ $booking->email }}</span>
@@ -23,22 +23,22 @@
                   <strong>Phone:</strong> <span>{{ $booking->phone }}</span>
                 </li>
                 <li class="d-flex justify-content-between mb-2">
-                  <strong>Paket:</strong> <span>{{ $booking->package->package_name }}</span>
+                  <strong>Package:</strong> <span>{{ $booking->package->package_name }}</span>
                 </li>
                 <li class="d-flex justify-content-between mb-2">
-                  <strong>Waktu:</strong> <span>{{ $booking->package->time }}</span>
+                  <strong>Time:</strong> <span>{{ $booking->package->time }}</span>
                 </li>
                 <li class="d-flex justify-content-between mb-2">
-                  <strong>Tanggal:</strong> <span>{{ $booking->selected_date }}</span>
+                  <strong>Date:</strong> <span>{{ $booking->selected_date }}</span>
                 </li>
                 <li class="d-flex justify-content-between mb-2">
-                  <strong>Kategori Pax:</strong> <span>{{ $booking->pax_category }}</span>
+                  <strong>Pax Category:</strong> <span>{{ $booking->pax_category }}</span>
                 </li>
                 <li class="d-flex justify-content-between mb-2">
-                  <strong>Jumlah Pax:</strong> <span>{{ $booking->num_pax }}</span>
+                  <strong>Number Pax:</strong> <span>{{ $booking->num_pax }}</span>
                 </li>
                 <li class="d-flex justify-content-between mt-3">
-                  <strong>Total Harga:</strong>
+                  <strong>Total Price:</strong>
                   <span class="fs-5 text-gradient-primary">Rp {{ number_format($booking->total_price,0,',','.') }}</span>
                 </li>
               </ul>
@@ -51,7 +51,7 @@
           <div class="card shadow-sm">
             <div class="card-header bg-gradient-success text-white d-flex align-items-center">
               <i class="bi bi-credit-card-2-front-fill me-2 fs-4"></i>
-              <h5 class="mb-0 text-white">Informasi Pembayaran</h5>
+              <h5 class="mb-0 text-white">Payment Information</h5>
             </div>
             <div class="card-body">
               <!-- Bank Mandiri -->
@@ -59,8 +59,8 @@
                 {{-- <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Mandiri_logo.svg" alt="Bank Mandiri" class="bank-logo me-3"> --}}
                 <div>
                   <div><strong>Bank:</strong> Mandiri</div>
-                  <div><strong>No. Rek:</strong> 1520 0186 49828</div>
-                  <div><strong>Atas Nama:</strong> PT. Phinisi Hakata</div>
+                  <div><strong>Acount Number:</strong> 1520 0186 49828</div>
+                  <div><strong>On Behalf Of:</strong> PT. Phinisi Hakata</div>
                 </div>
               </div>
   
@@ -70,7 +70,7 @@
               </div> -->
   
               <p class="mb-3">
-                <strong>Jumlah Pembayaran:</strong>
+                <strong>Payment Amount:</strong>
                 <span class="fs-5 text-gradient-success">Rp {{ number_format($booking->total_price,0,',','.') }}</span>
               </p>
   

@@ -29,7 +29,7 @@
               <!-- form card -->
               <div class="card card-primary">
                 <div class="card-header">
-                  <h3 class="card-title">Edit Booking #{{ $booking->id }}</h3>
+                  <h3 class="card-title">Form Edit Booking</h3>
                 </div>
                 <!-- /.card-header -->
                 <form action="{{ route('admin.bookings.update', $booking->id) }}" method="POST">

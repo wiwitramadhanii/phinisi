@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Documentation Data</h1>
+            <h1 class="m-0">Documentation's Data</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -45,11 +45,7 @@
                     @forelse ($documentations as $documentation)
                       <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $documentation->package->name ?? $documentation->package_id }}</td>
-                        {{-- <td>
-                          <img src="{{ asset('storage/' . $documentation->file_path) }}" width="100" class="img-thumbnail" alt="Documentation {{ $documentation->id }}">
-                            <a href="{{ asset('storage/' . $documentation->file_path) }}"></a>
-                        </td> --}}
+                        <td>{{ $documentation->package->package_name ?? $documentation->package_id }}</td>
                         <td>
                           <ul class="list-unstyled d-flex flex-wrap gap-2">
                             @foreach($documentation->file_path ?? [] as $path)
@@ -65,14 +61,11 @@
                              class="btn btn-sm btn-primary">
                             <i class="fas fa-pen"></i>
                           </a>
-                          <form action="{{ route('admin.documentations.destroy', $documentation->id) }}"
-                                method="POST"
-                                class="d-inline"
-                                onsubmit="return confirm('Hapus gambar ini?')">
+                          <form id="delete-form-{{ $documentation->id }}" action="{{ route('admin.documentations.destroy', $documentation->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger">
-                              <i class="fas fa-trash"></i>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $documentation->id }})">
+                                <i class="fas fa-trash"></i>
                             </button>
                           </form>
                         </td>
@@ -92,5 +85,23 @@
     </section>
     <!-- /.content -->
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function confirmDelete(id) {
+      Swal.fire({
+          title: 'Apakah kamu yakin?',
+          text: "Data dokumentasi ini akan dihapus permanen!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Ya, hapus!',
+          cancelButtonText: 'Batal'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              document.getElementById('delete-form-' + id).submit();
+          }
+      });
+  }
+</script>
 @endsection

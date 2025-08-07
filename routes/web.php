@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     [BookingController::class, 'togglePayStatus'])
     ->name('bookings.togglePay');
 });
+Route::get('/packages/{package}/detail', [PackageController::class, 'detail'])->name('packages.detail');
 
 Route::prefix('bookings')->group(function () {
     Route::post('/store', [BookingController::class, 'store'])->name('bookings.store');

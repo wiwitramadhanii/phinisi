@@ -52,10 +52,15 @@ class DocumentationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Documentation $documentation)
+    public function edit($id)
     {
-        $packages = Package::all();
-        return view('admin.documentations.edit', compact('documentation', 'packages'));
+        $documentation = Documentation::findOrFail($id);
+        $packageName = Package::where('id', $documentation->package_id)->value('package_name');
+        $images = is_array($documentation->file_path)
+        ? $documentation->file_path
+        : json_decode($documentation->file_path, true);
+
+        return view('admin.documentations.edit', compact('documentation', 'packageName', 'images'));
     }
 
     /**

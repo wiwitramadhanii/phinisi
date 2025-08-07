@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Data Slider</h1>
+            <h1 class="m-0">Slider's Data</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                       <label for="title">Title</label>
-                      <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" placeholder="Enter Slider Title">
+                      <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', $slider->title) }}" placeholder="Enter Slider Title">
                     </div>
                     <!-- error message untuk title -->
                     @error('title')

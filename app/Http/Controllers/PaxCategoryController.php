@@ -81,8 +81,8 @@ class PaxCategoryController extends Controller
     public function edit($id)
     {
         $paxCategory = PaxCategory::findOrFail($id);
-        $packages = Package::all(); // Mengambil data package
-        return view('paxCategories.edit', compact('paxCategory', 'packages'));
+        $packageName = Package::where('id', $paxCategory->package_id)->value('package_name');
+        return view('paxCategories.edit', compact('paxCategory', 'packageName'));
     }
 
     public function update(Request $request, $id)

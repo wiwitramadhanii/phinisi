@@ -17,10 +17,10 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <a href="{{ route('login') }}" class="h1"><b>Admin</b>LTE</a>
-    </div>
+  <div class="card ">
+    {{-- <div class="card-header text-center">
+      <a href="{{ route('login') }}" class="h1"><b>Pinisi</b> Hakata</a>
+    </div> --}}
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
@@ -78,9 +78,9 @@
       {{-- <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
       </p> --}}
-      <p class="mb-0">
+      {{-- <p class="mb-0">
         <a href="{{ route('register') }}" class="text-center">Register if you don't have an account</a>
-      </p>
+      </p> --}}
     </div>
     <!-- /.card-body -->
   </div>

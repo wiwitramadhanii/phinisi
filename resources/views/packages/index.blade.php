@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Package Data</h1>
+            <h1 class="m-0">Package's Data</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -36,15 +36,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Package Name</th>
                                     <th>Image</th>
+                                    <th>Package Name</th>
                                     <th>Time</th>
                                     <th>Route</th>
                                     <th>Pax</th>
                                     <th>Price</th>
-                                    <th>Include</th>
-                                    <th>Exclude</th>
-                                    <th>Rundown</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -52,49 +49,28 @@
                                 @foreach ($packages as $package)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $package->package_name }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . $package->image) }}" width="100">
+                                      <img src="{{ asset('storage/' . $package->image) }}" width="100">
                                     </td>
+                                    <td>{{ $package->package_name }}</td>
                                     <td>{{ $package->time }}</td>
                                     <td>{{ $package->route }}</td>
                                     <td>{{ $package->pax }}</td>
                                     <td>Rp {{ number_format($package->min_price, 0, ',', '.') }}</td>
                                     <td>
-                                      <ul>
-                                        @foreach ($package->include ?? [] as $include)
-                                          <li>{{ $include }}</li>
-                                        @endforeach
-                                      </ul>
-                                    </td>
-                                    <td>
-                                      <ul>
-                                        @foreach ($package->exclude ?? [] as $exclude)
-                                          <li>{{ $exclude }}</li>
-                                        @endforeach
-                                      </ul>
-                                    </td>
-                                    <td>
-                                      <ul>
-                                        @foreach ($package->rundown ?? [] as $item)
-                                          <li>
-                                            <strong>{{ $item['time'] ?? '-' }}</strong> —
-                                            {{ $item['activity'] ?? '-' }}
-                                          </li>
-                                        @endforeach
-                                      </ul>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-pen"></i> Edit
-                                        </a>
-                                        <form action="{{ route('packages.destroy', $package->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </button>
-                                        </form>
+                                      <a href="{{ route('packages.detail', $package->id) }}" class="btn btn-info btn-sm">
+                                          <i class="fas fa-eye"></i> View
+                                      </a>
+                                      <a href="{{ route('packages.edit', $package->id) }}" class="btn btn-primary btn-sm">
+                                          <i class="fas fa-pen"></i> Edit
+                                      </a>
+                                      <form id="delete-form-{{ $package->id }}" action="{{ route('packages.destroy', $package->id) }}" method="POST" style="display:inline;">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $package->id }})">
+                                              <i class="fas fa-trash"></i> Delete
+                                          </button>
+                                      </form>
                                     </td>
                                 </tr> 
                                 @endforeach
@@ -109,7 +85,25 @@
     </div>
 </section>
 <!-- /.content -->
-
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function confirmDelete(id) {
+      Swal.fire({
+          title: 'Apakah kamu yakin?',
+          text: "Data Package ini akan dihapus permanen!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Ya, hapus!',
+          cancelButtonText: 'Batal'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              document.getElementById('delete-form-' + id).submit();
+          }
+      });
+  }
+</script>
 
 @endsection
