@@ -40,14 +40,19 @@ class DocumentationController extends Controller
         ]);
 
         $paths = [];
-        $paths[] = $request->file('file_path')->store('documentations', 'public');
-        
+        foreach ($request->file('file_path') as $file) {
+            $paths[] = $file->store('documentations', 'public');
+        }
+
         Documentation::create([
             'package_id' => $request->package_id,
-            'file_path'  => $paths,
-          ]);
-        return redirect()->route('admin.documentations.index')->with('success', 'File created successfully');
+            'file_path'  => $paths, // langsung array, Eloquent akan simpan JSON
+        ]);
+
+        return redirect()->route('admin.documentations.index')
+            ->with('success', 'File created successfully');
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -77,15 +82,29 @@ class DocumentationController extends Controller
         $documentation->package_id = $request->package_id;
 
         if ($request->hasFile('file_path')) {
-            Storage::disk('public')->delete($documentation->file_path);
-            $filePath = $request->file('file_path')->store('documentations', 'public');
-            $documentation->file_path = $filePath;
+        // Hapus file lama kalau ada
+            if (is_array($documentation->file_path)) {
+                foreach ($documentation->file_path as $oldFile) {
+                    Storage::disk('public')->delete($oldFile);
+                }
+            } elseif ($documentation->file_path) {
+                Storage::disk('public')->delete($documentation->file_path);
+            }
+
+        // Upload file baru
+            $paths = [];
+            foreach ($request->file('file_path') as $file) {
+                $paths[] = $file->store('documentations', 'public');
+            }
+
+            $documentation->file_path = $paths; // simpan array, Laravel cast otomatis jadi JSON
         }
+
         $documentation->save();
 
         return redirect()->route('admin.documentations.index')->with('success', 'File updated successfully');
-
     }
+
 
     /**
      * Remove the specified resource from storage.

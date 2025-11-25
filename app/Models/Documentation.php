@@ -15,7 +15,7 @@ class Documentation extends Model
     ];
 
     protected $casts = [
-        'file_path' => 'array',
+        'file_path' => 'array', 
     ];
 
     public function package()

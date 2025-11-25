@@ -47,8 +47,11 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $documentation->package->package_name ?? $documentation->package_id }}</td>
                         <td>
+                          @php
+                            $paths = is_array($documentation->file_path) ? $documentation->file_path : ( $documentation->file_path ? [$documentation->file_path] : [] );
+                          @endphp
                           <ul class="list-unstyled d-flex flex-wrap gap-2">
-                            @foreach($documentation->file_path ?? [] as $path)
+                            @foreach($paths as $path)
                               <li>
                                 <img src="{{ asset('storage/' . $path) }}" width="100" class="img-thumbnail" alt="Documentation {{ $documentation->id }}">
                                   <a href="{{ asset('storage/' . $path) }}"></a>

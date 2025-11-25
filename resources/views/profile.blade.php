@@ -164,7 +164,7 @@
             <p><i class="fas fa-map-marker-alt text-danger mr-2"></i>{{ $company['contact']['address'] }}</p>
             <p><i class="fas fa-phone-alt text-success mr-2"></i>{{ $company['contact']['phone'] }}</p>
             <p><i class="fas fa-envelope text-primary mr-2"></i>{{ $company['contact']['email'] }}</p>
-            <a href="mailto:{{ $company['contact']['phone'] }}" class="btn btn-block btn-outline-success mt-3">Whatsapp</a>
+            <a href="https://wa.me/6281234567890"class="btn btn-block btn-outline-success mt-3">Whatsapp</a>
           </div>
         </div>
       </div>
