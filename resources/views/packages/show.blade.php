@@ -234,10 +234,8 @@
     document.addEventListener("DOMContentLoaded", function () {
     const dateInput = document.getElementById("selected_date");
 
-    // Mendapatkan tanggal hari ini dalam format YYYY-MM-DD
     let today = new Date().toISOString().split("T")[0];
 
-    // Set atribut min pada input date agar hanya bisa memilih hari ini atau setelahnya
     dateInput.setAttribute("min", today);
     });
     function validateForm() {
@@ -249,8 +247,7 @@
             return false;
         }
 
-        // Pengecekan apakah tanggal full booked
-        const fullBookedDates = getFullBookedDatesSync(); // Fungsi sinkron
+        const fullBookedDates = getFullBookedDatesSync(); 
         if (fullBookedDates.includes(selectedDate)) {
             alert("The selected date is fully booked. Please choose another date.");
             return false;
@@ -259,12 +256,10 @@
         return true;
     }
 
-    // Fungsi sinkron untuk mendapatkan tanggal-tanggal full booked
     function getFullBookedDatesSync() {
-        // Gunakan request sinkron untuk mendapatkan data
         var fullBookedDates = [];
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/api/full-booked-dates", false); // false untuk sinkron
+        xhr.open("GET", "/api/full-booked-dates", false); 
         xhr.onload = function () {
             if (xhr.status === 200) {
                 fullBookedDates = JSON.parse(xhr.responseText);
@@ -275,56 +270,50 @@
     }
 </script>
 <script>
-    // Fungsi untuk memeriksa ketersediaan tanggal
-    async function checkDateAvailability() {
-        const selectedDate = document.getElementById('selected_date').value;
-        const availabilityMessage = document.getElementById('availabilityMessage');
-        const packageId = {{ $package->id }};  // Mengambil package_id saat ini dari URL
-    
-        if (!selectedDate) {
-            availabilityMessage.textContent = 'Please select a date.';
-            availabilityMessage.style.color = 'gray';
-            return;
-        }
-    
-        // Memanggil API untuk memeriksa ketersediaan tanggal
-        const response = await fetch(`/api/check-availability?date=${selectedDate}&package_id=${packageId}`);
-        const data = await response.json();
-    
-        // Cek apakah paket yang dipilih sudah dipesan
-        if (data.unavailablePackages.includes(packageId)) {
-            // Jika paket yang dipilih sudah dipesan, tampilkan pesan
-            availabilityMessage.textContent = "Fully booked. Please choose another date.";
-            availabilityMessage.style.color = 'red';
-            document.getElementById('submitButton').disabled = true;  // Nonaktifkan tombol pemesanan
-        } else {
-            // Memeriksa apakah ada pemesanan Full Day Kodingareng di tanggal yang sama
-            if (data.unavailablePackages.includes(3) && (packageId === 1 || packageId === 2)) {
-                // Jika Full Day Kodingareng sudah dipesan, Golden Hours Cruise atau Morning Samalona tidak bisa dipesan
-                availabilityMessage.textContent = "Fully booked. Please choose another date.";
-                availabilityMessage.style.color = 'red';
-                document.getElementById('submitButton').disabled = true;  // Nonaktifkan tombol pemesanan
-            }
-            // Memeriksa apakah ada pemesanan Golden Hours Cruise di tanggal yang sama
-            else if (data.unavailablePackages.includes(1) && packageId === 2) {
-                // Jika sudah ada pemesanan Golden Hours Cruise, Morning Samalona tetap bisa dipesan
-                availabilityMessage.textContent = "The selected date is available.";
-                availabilityMessage.style.color = 'green';
-                document.getElementById('submitButton').disabled = false;  // Aktifkan tombol pemesanan
-            }
-            // Memeriksa apakah ada pemesanan Golden Hours Cruise atau Morning Samalona di tanggal yang sama
-            else if ((data.unavailablePackages.includes(1) || data.unavailablePackages.includes(2)) && packageId === 3) {
-                // Jika sudah ada pemesanan Golden Hours Cruise atau Morning Samalona, Full Day Kodingareng tidak bisa dipesan
-                availabilityMessage.textContent = "Fully booked. Please choose another date."
-                availabilityMessage.style.color = 'red';
-                document.getElementById('submitButton').disabled = true;  // Nonaktifkan tombol pemesanan
-            } else {
-                // Jika tidak ada pemesanan atau paket yang bisa dipesan
-                availabilityMessage.textContent = "The selected date is available.";
-                availabilityMessage.style.color = 'green';
-                document.getElementById('submitButton').disabled = false;  // Aktifkan tombol pemesanan
-            }
-        }
-    }
-</script>
+  async function checkDateAvailability() {
+      const selectedDate = document.getElementById('selected_date').value;
+      const availabilityMessage = document.getElementById('availabilityMessage');
+      const submitButton = document.getElementById('submitButton');
+      const packageId = {{ $package->id }};  
+  
+      if (!selectedDate) {
+          availabilityMessage.textContent = 'Please select a date.';
+          availabilityMessage.style.color = 'gray';
+          submitButton.disabled = true;
+          return;
+      }
+  
+      const response = await fetch(`/api/check-availability?date=${selectedDate}&package_id=${packageId}`);
+      const data = await response.json();
+  
+      const unavailable = data.unavailablePackages;
+  
+      const isUnavailable = (id) => unavailable.includes(id);
+  
+      if (isUnavailable(packageId)) {
+          return showUnavailable();
+      } else if (isUnavailable(4) && [1, 2, 3].includes(packageId)) { 
+          return showUnavailable();
+      } else if (isUnavailable(1) && [2, 3].includes(packageId)) {
+          return showAvailable();
+      } else if ([1, 2, 3].some(id => isUnavailable(id)) && packageId === 4) {
+          return showUnavailable();
+      } else {
+        return showAvailable()
+      };
+  
+      function showUnavailable() {
+          availabilityMessage.textContent = "Fully booked. Please choose another date.";
+          availabilityMessage.style.color = 'red';
+          submitButton.disabled = true;
+      }
+  
+      function showAvailable() {
+          availabilityMessage.textContent = "The selected date is available.";
+          availabilityMessage.style.color = 'green';
+          submitButton.disabled = false;
+      }
+  }
+  </script>
+  
 @endsection

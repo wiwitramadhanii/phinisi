@@ -33,10 +33,8 @@
           <div id="calendarEvent">
               <div class="calendar-content">
                   <div class="container text-white">
-                      <!-- Header tanggal event akan di-update secara dinamis -->
                       <h3 id="eventDate" class="mb-3">Packages</h3>
                       <ul id="eventList" class="list-unstyled">
-                          <!-- Data event awal akan di-render via API dari JS -->
                           <li class="event-info">No events are available.</li>
                       </ul>
                   </div>

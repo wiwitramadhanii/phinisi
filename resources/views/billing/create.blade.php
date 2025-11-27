@@ -179,52 +179,55 @@
       }
     </style>
   
-    <!-- Script Perhitungan Harga -->
-    <script>
-      document.getElementById('pax').addEventListener('input', function() {
-        const pricePerPax = {{ $pricePerPax }};
-        const numPax = parseInt(this.value) || 0;
-        const totalPrice = numPax * pricePerPax;
-        document.getElementById('display_total_price').textContent =
-          `Rp ${new Intl.NumberFormat('id-ID').format(totalPrice)}`;
-        document.getElementById('total_price').value = totalPrice;
-      });
-    </script>
-    <script>
-        (function(){
-          const minPax = {{ $minPax }};
-          const maxPax = {{ $maxPax }};
-          const pricePerPax = {{ $pricePerPax }};
-          const input = document.getElementById('pax');
-          const display = document.getElementById('display_total_price');
-          const hiddenTotal = document.getElementById('total_price');
-      
-          function updateDisplay(val) {
-            const total = val * pricePerPax;
-            display.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(total)}`;
-            hiddenTotal.value = total;
-          }
-      
-          document.getElementById('pax-increase').addEventListener('click', () => {
-            let val = parseInt(input.value, 10);
-            if (val < maxPax) {
-              input.value = ++val;
-              updateDisplay(val);
+  <script>
+    (function() {
+    
+        const minPax = {{ $minPax }};             
+        const maxPax = {{ $maxPax }};             
+        const pricePerPax = {{ $pricePerPax }};   
+    
+        const paxInput = document.getElementById('pax');                    
+        const priceDisplay = document.getElementById('display_total_price'); 
+        const hiddenTotalInput = document.getElementById('total_price');     
+    
+        /**
+         * @param {number} pax 
+         */
+        function updateTotalPrice(pax) {
+            const total = pax * pricePerPax;
+    
+            const formatted = new Intl.NumberFormat('id-ID').format(total);
+    
+            priceDisplay.textContent = `Rp ${formatted}`;
+            hiddenTotalInput.value = total; 
+        }
+    
+        document.getElementById('pax-increase').addEventListener('click', () => {
+            let currentPax = parseInt(paxInput.value, 10);
+    
+            if (currentPax < maxPax) {
+                currentPax++;
+                paxInput.value = currentPax;
+                updateTotalPrice(currentPax);
             }
-          });
-      
-          document.getElementById('pax-decrease').addEventListener('click', () => {
-            let val = parseInt(input.value, 10);
-            if (val > minPax) {
-              input.value = --val;
-              updateDisplay(val);
+        });
+    
+        document.getElementById('pax-decrease').addEventListener('click', () => {
+            let currentPax = parseInt(paxInput.value, 10);
+    
+            if (currentPax > minPax) {
+                currentPax--;
+                paxInput.value = currentPax;
+                updateTotalPrice(currentPax);
             }
-          });
-      
-          // inisialisasi awal
-          updateDisplay(parseInt(input.value, 10));
-        })();
-    </script>
+        });
+    
+        const initialPax = parseInt(paxInput.value, 10);
+        updateTotalPrice(initialPax);
+    
+    })();
+  </script>
+    
 </div>
   
 @endsection

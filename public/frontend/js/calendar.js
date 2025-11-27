@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentMonth = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
 
-    // Fungsi untuk menampilkan kalender
     function renderCalendar(month, year) {
         monthYear.innerText = `${getMonthName(month)} ${year}`;
         calendarDays.innerHTML = '';
@@ -13,14 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const firstDay = new Date(year, month, 1).getDay();
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        // Tambahkan cell kosong untuk hari sebelum hari pertama bulan berjalan
         for (let i = 0; i < firstDay; i++) {
             const emptyCell = document.createElement('div');
             emptyCell.classList.add('emptyCell');
             calendarDays.appendChild(emptyCell);
         }
 
-        // Buat cell untuk setiap hari dalam bulan
         for (let day = 1; day <= daysInMonth; day++) {
             const dayCell = document.createElement('div');
             dayCell.classList.add('dayCell');
@@ -29,22 +26,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const formattedDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const todayDate = getTodayDate();
 
-            // Jika tanggal yang dibuat lebih kecil dari tanggal hari ini, nonaktifkan klik
             if (new Date(formattedDate) < new Date(todayDate)) {
                 dayCell.classList.add('disabled');
                 dayCell.style.cursor = 'not-allowed';
             } else {
-                // Tambahkan event listener untuk klik pada dayCell
                 dayCell.addEventListener('click', function () {
-                    // Hapus kelas 'selected' dari cell yang sebelumnya dipilih
                     document.querySelectorAll('.dayCell.selected').forEach(cell => cell.classList.remove('selected'));
-                    // Tambahkan kelas 'selected' ke cell yang di‑klik
                     dayCell.classList.add('selected');
-                    // Update informasi booking sesuai tanggal yang dipilih
                     updateBookingInfo(formattedDate);
                 });
                 
-                // Jika tanggal sama dengan hari ini, set default highlight dan update booking info
                 if (formattedDate === todayDate) {
                     dayCell.classList.add('selected');
                     updateBookingInfo(formattedDate);
@@ -55,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Mengambil nama bulan
     function getMonthName(monthIndex) {
         const months = [
             "January", "February", "March", "April", "May", "June",
@@ -64,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return months[monthIndex];
     }
 
-    // Menghasilkan tanggal hari ini dengan format YYYY-MM-DD
     function getTodayDate() {
         const today = new Date();
         return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
@@ -79,14 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(data => {
-                const bookings = data.bookings; // e.g. { "1": [...], "2": [...], "3": [...], "4": [...] }
+                const bookings = data.bookings; 
                 const eventList = document.getElementById('eventList');
-                eventList.innerHTML = ''; // Bersihkan daftar event sebelumnya
+                eventList.innerHTML = ''; 
     
-                // Cek status booking
-                const fullDayBooked = bookings['4'] && bookings['4'].length > 0;                // Full Day Trip (ID 4)
-                const morningGroupIds = ['1','2','3'];                                         // IDs paket pagi
-                const anyMorningBooked = morningGroupIds.some(id => bookings[id] && bookings[id].length > 0);
+                const fullDayBooked = bookings['4'] && bookings['4'].length > 0;                
+                const halfDayGroupIds = ['1','2','3'];                                        
+                const anyHalfDayBooked = halfDayGroupIds.some(id => bookings[id] && bookings[id].length > 0);
     
                 events.forEach(event => {
                     const id = String(event.id);
@@ -94,13 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
     
                     let isBooked;
                     if (fullDayBooked) {
-                        // Jika Full Day Trip terpesan: semua paket full
                         isBooked = true;
                     } else if (id === '4') {
-                        // Jika event adalah Full Day Trip & ada salah satu pagi terpesan: full
-                        isBooked = anyMorningBooked;
+                        isBooked = anyHalfDayBooked;
                     } else {
-                        // Paket pagi (1–3) hanya full jika sendiri terpesan
                         isBooked = selfBooked;
                     }
     
