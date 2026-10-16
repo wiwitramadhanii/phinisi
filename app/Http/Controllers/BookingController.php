@@ -10,15 +10,52 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Booking::all();
+        $request->validate([
+            'date_from' => 'nullable|date',
+            'date_to'   => 'nullable|date|after_or_equal:date_from',
+        ]);
+    
+        $query = Booking::with('package');
+    
+        // Filter tanggal mulai
+        if ($request->filled('date_from')) {
+            $query->whereDate(
+                'selected_date',
+                '>=',
+                $request->date_from
+            );
+        }
+    
+        // Filter tanggal akhir
+        if ($request->filled('date_to')) {
+            $query->whereDate(
+                'selected_date',
+                '<=',
+                $request->date_to
+            );
+        }
+    
+        $bookings = $query
+            ->orderBy('is_already_pay', 'asc')
+            ->orderBy('selected_date', 'asc')
+            ->get();
+    
         $paxCategories = PaxCategory::all();
-        $bookings = Booking::with('package')->get();
-        $bookings = Booking::with('package')->orderBy('is_already_pay', 'asc')
-                                            ->orderBy('selected_date', 'asc')
-                                            ->get();
-        return view('admin.bookings.index', compact('bookings', 'paxCategories'));
+    
+        return view(
+            'admin.bookings.index',
+            compact('bookings', 'paxCategories')
+        );
+        
+        // $bookings = Booking::all();
+        // $paxCategories = PaxCategory::all();
+        // $bookings = Booking::with('package')->get();
+        // $bookings = Booking::with('package')->orderBy('is_already_pay', 'asc')
+        //                                     ->orderBy('selected_date', 'asc')
+        //                                     ->get();
+        // return view('admin.bookings.index', compact('bookings', 'paxCategories'));
     }
 
     public function showBillingForm($package_id, Request $request)
